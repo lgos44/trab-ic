@@ -1,0 +1,62 @@
+     radius\_mean	
+     texture\_mean
+     perimeter\_mean
+     area\_mean
+     smoothness\_mean
+     compactness\_mean
+     concavity\_mean
+     concave points\_mean
+     symmetry\_mean
+     fractal\_dimension\_mean
+     radius\_se
+     texture\_se
+     perimeter\_se
+     area\_se
+     smoothness\_se
+     compactness\_se
+     concavity\_se 
+     concave points\_se
+     symmetry\_se
+     fractal\_dimension\_se
+     radius\_worst
+     texture\_worst
+     perimeter\_worst
+     area\_worst
+     smoothness\_worst
+     compactness\_worst
+     concavity\_worst
+     concave points\_worst
+     symmetry\_worst
+     fractal\_dimension\_worst
+
+
+radius\_mean
+radius\_se
+radius\_worst
+texture\_mean
+texture\_se
+texture\_worst
+perimeter\_mean
+perimeter\_se
+perimeter\_worst
+area\_mean
+area\_se
+area\_worst
+smoothness\_mean
+smoothness\_se
+smoothness\_worst
+compactness\_mean
+compactness\_se
+compactness\_worst
+concavity\_mean
+concavity\_se
+concavity\_worst
+concave points\_mean
+concave points\_se
+concave points\_worst
+symmetry\_mean
+symmetry\_se
+symmetry\_worst
+fractal\_dimension\_mean
+fractal\_dimension\_se
+fractal\_dimension\_worst

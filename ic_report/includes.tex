@@ -1,0 +1,32 @@
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+	{-2.5ex\@plus -1ex \@minus -.25ex}%
+	{1.25ex \@plus .25ex}%
+	{\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{5} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{5}    % how many sectioning levels to show in ToC
+\usepackage[margin=1in]{geometry} % Change margin
+\usepackage{indentfirst}
+%\newlength\tindent
+%\setlength{\tindent}{\parindent}
+%\setlength{\parindent}{0pt}
+%\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\usepackage[hidelinks]{hyperref}
+%\usepackage{geometry}
+%\DeclareCaptionFont{white}{\color{white}} 
+%\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+%\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\makeatletter
+\newenvironment{shiftedflalign}{%
+	\start@align\tw@\st@rredfalse\m@ne%
+	\hskip\tindent
+}{%
+\endalign
+}
+\newenvironment{shiftedflalign*}{%
+	\start@align\tw@\st@rredtrue\m@ne
+	\hskip\tindent
+}{%
+\endalign
+}
+\makeatother

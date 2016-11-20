@@ -1,0 +1,279 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Short title]{Breast Cancer Wisconsin (Diagnostic)} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Luís Gustavo \\
+Aramys Almeida Matos
+} % Your name
+
+\institute[UFRJ] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+Inteligência Computacional \\ % Your institution for the title page
+\medskip
+%\textit{john@smith.com} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+%\begin{frame}
+%%\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+%\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+%\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+\section{First Section} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%------------------------------------------------
+
+\subsection{Subsection Example} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+
+\begin{frame}
+\frametitle{Dataset}
+\begin{itemize}
+\item Exames para câncer de mama.
+\item Características do núcleo de células computadas a partir de imagens digitalizadas
+\item 30 variáveis de entrada
+\item 1 variável de saída
+\item Raio, textura, perímetro, área, suavidade, compacidade, concavidade, pontos côncavos, simetria, dimensão fractal
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Variáveis}
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+\column{.45\textwidth} % Left column and width
+\begin{itemize}
+\item Raio
+\item textura
+\item perímetro
+\item área
+\item suavidade
+\end{itemize}
+\column{.5\textwidth} % Right column and width
+\begin{itemize}
+\item compacidade
+\item concavidade
+\item  pontos côncavos
+\item simetria
+\item  dimensão fractal
+\end{itemize}
+\end{columns}
+\begin{block}{}
+Para cada um desses dados são calculadas as métricas média, desvio padrão e pior valor, totalizando 30 variáveis.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Problema}
+\begin{itemize}
+\item Problema de classificação
+\item Identificar se o câncer é benigno ou maligno.
+\item Aplicar e avaliar os modelos de classificação:
+\begin{itemize}
+\item Classificador Bayesiano Simples
+\item Classificador Bayesiano Quadrático
+\item Mínimos Quadrados
+\item Regressão Logística
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Matriz de Correlação}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../corrcoef.png}
+    \label{fig:corrcoef}
+\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Distância Euclidiana}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../dist.png}
+    \label{fig:corrcoef}
+\end{figure}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+
+\frametitle{Histogramas}
+Smoothness
+\begin{figure}[H]
+\centering
+  \includegraphics[width=.3\linewidth]{./img/smoothness_mean}
+  %\captionof{figure}{Mean}
+  \label{fig:test1}
+\end{figure}%
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{./img/smoothness_se}
+  %\captionof{figure}{Standard Error}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{./img/smoothness_worst}
+  %\captionof{figure}{Worst}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Histogramas}
+Area
+\begin{figure}[H]
+\centering
+  \includegraphics[width=.3\linewidth]{./img/area_mean}
+  %\captionof{figure}{Mean}
+  \label{fig:test1}
+\end{figure}%
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{./img/area_se}
+  %\captionof{figure}{Standard Error}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{./img/area_worst}
+  %\captionof{figure}{Worst}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+\end{frame}
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Tecnologia}
+\begin{block}{Python}
+\begin{itemize}
+\item SciPy
+	\begin{itemize}
+	\item \textit{NumPy}
+	\item \textit{matplotlib}
+	\item \textit{pandas}: Python Data Analysis Library
+	\end{itemize}
+\item \textit{scikit-learn}: Machine Learning in Python
+\end{itemize}
+\end{block}
+
+\begin{block}{Matlab}
+\begin{itemize}
+\item Statistics and Machine Learning Toolbox
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\end{document} 
