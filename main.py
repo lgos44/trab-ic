@@ -3,12 +3,14 @@ import csv
 import matplotlib.pyplot as plt
 from scipy import stats
 from sklearn.naive_bayes import GaussianNB
+from sklearn import linear_model
 
 variable_names = ['Diag', 'Radius Mean', 'Texture Mean', 'Perimeter Mean', 'Area Mean', 'Smoothness Mean', 'Compactness Mean', 'Concavity Mean', 'Concave Points Mean',    'Symmetry Mean', 'Fractal Dimension Mean',	'Radius SE', 'Texture SE', 'Perimeter SE', 'Area SE', 'Smoothness SE', 'Compactness SE', 'Concavity SE',     'Concave points SE', 'Symmetry SE', 'Fractal Dimension SE',	'Radius Worst',	'Texture Worst', 'Perimeter Worst', 'Area Worst', 'Smoothness Worst',     'Compactness Worst',	'Concavity Worst', 'Concave Points Worst',	'Symmetry Worst', 'Fractal Dimension Worst']
 
 # Loads csv discarting the first line (variable names) 
 def loadCsv(filename):
-	b = []
+	data = []
+	target = []
 	with open(filename, 'rb') as csvfile:
 		reader = csv.reader(csvfile, delimiter=',', quotechar='|')
 		i = 0
@@ -16,8 +18,9 @@ def loadCsv(filename):
 			if i == 0: 
 				i += 1
 				continue
-			b.append([float(j) for j in row])
-	return b
+			data.append([float(row[j]) for j in range(1, len(row))])
+			target.append(int(row[0]))
+	return data, target
 
 def correlationCoeffMatrix(filename):
 	dataset = loadCsv(filename)
@@ -32,19 +35,19 @@ def correlationCoeffMatrix(filename):
 # zscore of the nparray 
 def zscore(nparray):
 	#saves first column (output var)
-	matrix=np.asmatrix(nparray)
-	output=matrix[:,0]
-	output_np=np.asarray(output)
+	#matrix=np.asmatrix(nparray)
+	#output=matrix[:,0]
+	#utput_np=np.asarray(output)
 
 	# Calculate zscore without output var
-	c = np.delete(nparray,0,1)
-	ctrans = np.transpose(c)
+	#c = np.delete(nparray,0,1)
+	ctrans = np.transpose(nparray)
 	ctranspad = stats.zscore(ctrans)
 	cpad = np.transpose(ctranspad)
 
 	# Add output var again
-	data_zscore = np.concatenate((output_np, cpad), axis=1)
-	return data_zscore
+	#data_zscore = np.concatenate((output_np, cpad), axis=1)
+	return cpad
 	
 # euclidean distance matrix of a np array
 def distanceMatrix(data):
@@ -60,7 +63,7 @@ def distanceMatrix(data):
 	return dist
 
 # Returns outliers indexes
-def removeOutliersByDistance(data, dist, pout):
+def removeOutliersByDistance(data, target, dist, pout):
 	## Distance mean
 	mi = np.mean(dist, axis=1)
 	mi_tuple = []
@@ -78,26 +81,34 @@ def removeOutliersByDistance(data, dist, pout):
 		outliers.append(mi_tuple[index][0])
 
 	data_clean = np.delete(data, (outliers), axis=0)
-	return data_clean
+	target_clean = np.delete(target, (outliers), axis=0)
+	return data_clean, target_clean
 
 
 ## Distance matrix and outline removal
-dataset = loadCsv('data2.csv')
-dataset_np = np.array(dataset)
+data, target = loadCsv('data2.csv')
+
+dataset_np = np.array(data)
+target_np = np.array(target)
 #sort by class 1st column
-dataset_np = dataset_np[dataset_np[:,1].argsort()]
+np.set_printoptions(threshold=np.nan)
+inds = target_np.argsort()
+target_np = target_np[inds[::1]]
+dataset_np = dataset_np[inds[::1]]
+print dataset_np[1:10,:]
+#dataset_np = dataset_np[dataset_np[:,1].argsort()]
 dataset_zs = zscore(dataset_np)
-dist = distanceMatrix(np.delete(dataset_zs,0,1))
-dataset_clean = removeOutliersByDistance(dataset_zs, dist, 0.1)
-dist_clean = distanceMatrix(np.delete(dataset_clean,0,1))
+dist = distanceMatrix(dataset_zs)
+dataset_clean, target_clean = removeOutliersByDistance(dataset_zs, target, dist, 0.1)
+dist_clean = distanceMatrix(dataset_clean)
 
 ## 
 gnb = GaussianNB()
-data = np.delete(dataset_clean,0,1)
-matrix=np.asmatrix(dataset_clean)
-output=matrix[:,0]
-target=np.asarray(output) 
-y_pred = gnb.fit(data, target.ravel()).predict(data)
+#data = np.delete(dataset_clean,0,1)
+#matrix=np.asmatrix(dataset_clean)
+#output=matrix[:,0]
+#target=np.asarray(output) 
+y_pred = gnb.fit(data, target).predict(data)
 
 mislabeled = 0
 for i in range(0,np.shape(data)[0]):
@@ -105,3 +116,19 @@ for i in range(0,np.shape(data)[0]):
 		mislabeled = mislabeled + 1
 print "Number of mislabeled points out of a total", np.shape(data)[0],  "points :", mislabeled 
 
+##
+h = .02
+logreg = linear_model.LogisticRegression(C=1e5)
+logreg.fit(data, target)
+
+#x_min, x_max = data[:, 0].min() - .5, data[:, 0].max() + .5
+#y_min, y_max = data[:, 1].min() - .5, data[:, 1].max() + .5
+#xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+#Z = logreg.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = logreg.predict(data)
+
+mislabeled = 0
+for i in range(0,np.shape(data)[0]):
+	if target[i] != Z[i]:
+		mislabeled = mislabeled + 1
+print "Number of mislabeled points out of a total", np.shape(data)[0],  "points :", mislabeled 
