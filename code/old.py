@@ -2,7 +2,7 @@ import numpy as np
 import csv
 import matplotlib.pyplot as plt
 from scipy import stats
-
+from sklearn.naive_bayes import GaussianNB
 
 variable_names = ['Diag', 'Radius Mean', 'Texture Mean', 'Perimeter Mean', 'Area Mean', 'Smoothness Mean', 'Compactness Mean', 'Concavity Mean', 'Concave Points Mean',    'Symmetry Mean', 'Fractal Dimension Mean',	'Radius SE', 'Texture SE', 'Perimeter SE', 'Area SE', 'Smoothness SE', 'Compactness SE', 'Concavity SE',     'Concave points SE', 'Symmetry SE', 'Fractal Dimension SE',	'Radius Worst',	'Texture Worst', 'Perimeter Worst', 'Area Worst', 'Smoothness Worst',     'Compactness Worst',	'Concavity Worst', 'Concave Points Worst',	'Symmetry Worst', 'Fractal Dimension Worst']
 
@@ -81,12 +81,27 @@ def removeOutliersByDistance(data, dist, pout):
 	return data_clean
 
 
+## Distance matrix and outline removal
 dataset = loadCsv('data2.csv')
 dataset_np = np.array(dataset)
-#sort by class
-dataset_np = dataset_np[dataset_np[:,1].argsort()]
+#sort by class 1st column
+dataset_np = dataset_np[dataset_np[:,0].argsort()]
 dataset_zs = zscore(dataset_np)
 dist = distanceMatrix(np.delete(dataset_zs,0,1))
 dataset_clean = removeOutliersByDistance(dataset_zs, dist, 0.1)
+print dataset_clean
 dist_clean = distanceMatrix(np.delete(dataset_clean,0,1))
 
+## 
+gnb = GaussianNB()
+data = np.delete(dataset_clean,0,1)
+matrix=np.asmatrix(dataset_clean)
+output=matrix[:,0]
+target=np.asarray(output) 
+y_pred = gnb.fit(data, target.ravel()).predict(data)
+
+mislabeled = 0
+for i in range(0,np.shape(data)[0]):
+	if target[i] != y_pred[i]:
+		mislabeled = mislabeled + 1
+print "Number of mislabeled points out of a total", np.shape(data)[0],  "points :", mislabeled 

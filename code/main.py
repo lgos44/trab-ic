@@ -117,37 +117,36 @@ def bayesianClassifier(data, target):
 	y_pred = gnb.fit(data, target).predict(data)
 	classifierStats(target, y_pred)
 
+def LogisticRegression(data, target):
+	logreg = linear_model.LogisticRegression(C=1e5)
+	logreg.fit(data, target)
+	#h = .02
+	#x_min, x_max = data[:, 0].min() - .5, data[:, 0].max() + .5
+	#y_min, y_max = data[:, 1].min() - .5, data[:, 1].max() + .5
+	#xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+	#Z = logreg.predict(np.c_[xx.ravel(), yy.ravel()])
+	Z = logreg.predict(data)
+	classifierStats(target,Z)
+
+
 ## Distance matrix and outline removal
 data, target = loadCsv('data2.csv')
 
 dataset_np = np.array(data)
 target_np = np.array(target)
 #sort by class 1st column
-np.set_printoptions(threshold=np.nan)
+#np.set_printoptions(threshold=np.nan)
 inds = target_np.argsort()
 target_np = target_np[inds[::1]]
 dataset_np = dataset_np[inds[::1]]
 #dataset_np = dataset_np[dataset_np[:,1].argsort()] NO
 dataset_zs = zscore(dataset_np)
 dist = distanceMatrix(dataset_zs)
-dataset_clean, target_clean = removeOutliersByDistance(dataset_zs, target, dist, 0.1)
+dataset_clean, target_clean = removeOutliersByDistance(dataset_zs, target_np, dist, 0.1)
 dist_clean = distanceMatrix(dataset_clean)
 
 bayesianClassifier(dataset_clean, target_clean)
+LogisticRegression(dataset_clean, target_clean)
 
-##
-h = .02
-logreg = linear_model.LogisticRegression(C=1e5)
-logreg.fit(data, target)
 
-#x_min, x_max = data[:, 0].min() - .5, data[:, 0].max() + .5
-#y_min, y_max = data[:, 1].min() - .5, data[:, 1].max() + .5
-#xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
-#Z = logreg.predict(np.c_[xx.ravel(), yy.ravel()])
-Z = logreg.predict(data)
 
-mislabeled = 0
-for i in range(0,np.shape(data)[0]):
-	if target[i] != Z[i]:
-		mislabeled = mislabeled + 1
-print "Number of mislabeled points out of a total", np.shape(data)[0],  "points :", mislabeled 
