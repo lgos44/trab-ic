@@ -1,5 +1,8 @@
+#!/usr/bin/python
+
 import numpy as np
 import csv
+import sys, getopt
 import matplotlib.pyplot as plt
 from scipy import stats
 from sklearn.naive_bayes import GaussianNB
@@ -84,6 +87,35 @@ def removeOutliersByDistance(data, target, dist, pout):
 	target_clean = np.delete(target, (outliers), axis=0)
 	return data_clean, target_clean
 
+def classifierStats(y, y_pred):
+	mislabeled = 0
+	vp = 0
+	fn = 0
+	fp = 0
+	vn = 0
+	for i in range(0,np.shape(y_pred)[0]):
+		if y[i] == 1 and y_pred[i] == 1:
+			vp = vp + 1
+		elif y[i] == -1 and y_pred[i] == 1:
+			fp = fp + 1
+		elif y[i] == 1 and y_pred[i] == -1:	
+			fn = fn + 1
+		elif y[i] == -1 and y_pred[i] == -1:	
+			vn = vn + 1
+	#print "Number of mislabeled points out of a total", np.shape(data)[0],  "points :", mislabeled
+	print "VP = ", vp
+	print "FP = ", fp
+	print "FN = ", fn
+	print "VN = ", vn 
+
+def bayesianClassifier(data, target):
+	gnb = GaussianNB()
+	#data = np.delete(dataset_clean,0,1)
+	#matrix=np.asmatrix(dataset_clean)
+	#output=matrix[:,0]
+	#target=np.asarray(output) 
+	y_pred = gnb.fit(data, target).predict(data)
+	classifierStats(target, y_pred)
 
 ## Distance matrix and outline removal
 data, target = loadCsv('data2.csv')
@@ -95,26 +127,13 @@ np.set_printoptions(threshold=np.nan)
 inds = target_np.argsort()
 target_np = target_np[inds[::1]]
 dataset_np = dataset_np[inds[::1]]
-print dataset_np[1:10,:]
-#dataset_np = dataset_np[dataset_np[:,1].argsort()]
+#dataset_np = dataset_np[dataset_np[:,1].argsort()] NO
 dataset_zs = zscore(dataset_np)
 dist = distanceMatrix(dataset_zs)
 dataset_clean, target_clean = removeOutliersByDistance(dataset_zs, target, dist, 0.1)
 dist_clean = distanceMatrix(dataset_clean)
 
-## 
-gnb = GaussianNB()
-#data = np.delete(dataset_clean,0,1)
-#matrix=np.asmatrix(dataset_clean)
-#output=matrix[:,0]
-#target=np.asarray(output) 
-y_pred = gnb.fit(data, target).predict(data)
-
-mislabeled = 0
-for i in range(0,np.shape(data)[0]):
-	if target[i] != y_pred[i]:
-		mislabeled = mislabeled + 1
-print "Number of mislabeled points out of a total", np.shape(data)[0],  "points :", mislabeled 
+bayesianClassifier(dataset_clean, target_clean)
 
 ##
 h = .02
