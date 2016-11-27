@@ -4,8 +4,10 @@ import numpy as np
 import csv
 import sys, getopt
 import matplotlib.pyplot as plt
+import random
 from scipy import stats
 from sklearn.naive_bayes import GaussianNB
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn import linear_model
 
 variable_names = ['Diag', 'Radius Mean', 'Texture Mean', 'Perimeter Mean', 'Area Mean', 'Smoothness Mean', 'Compactness Mean', 'Concavity Mean', 'Concave Points Mean',    'Symmetry Mean', 'Fractal Dimension Mean',	'Radius SE', 'Texture SE', 'Perimeter SE', 'Area SE', 'Smoothness SE', 'Compactness SE', 'Concavity SE',     'Concave points SE', 'Symmetry SE', 'Fractal Dimension SE',	'Radius Worst',	'Texture Worst', 'Perimeter Worst', 'Area Worst', 'Smoothness Worst',     'Compactness Worst',	'Concavity Worst', 'Concave Points Worst',	'Symmetry Worst', 'Fractal Dimension Worst']
@@ -24,6 +26,52 @@ def loadCsv(filename):
 			data.append([float(row[j]) for j in range(1, len(row))])
 			target.append(int(row[0]))
 	return data, target
+
+def splitDataset(dataset, splitRatio):
+	trainSize = int(len(dataset) * splitRatio)
+	trainSet = []
+	copy = list(dataset)
+	while len(trainSet) < trainSize:
+		index = random.randrange(len(copy))
+		trainSet.append(copy.pop(index))
+	return [trainSet, copy]
+
+import random
+def splitDataset(dataset, splitRatio):
+	trainSize = int(len(dataset) * splitRatio)
+	trainSet = []
+	copy = list(dataset)
+	while len(trainSet) < trainSize:
+		index = random.randrange(len(copy))
+		trainSet.append(copy.pop(index))
+	return [trainSet, copy]
+def statistics(data, individual=None):
+	inds = []
+	for i in range(0,10):
+		inds.append(i)
+		inds.append(i+10)
+		inds.append(i+20)
+	stats = []
+	maxs = []
+	mins = []
+	mean = []
+	std = []
+	p25 = []
+	p50 = []
+	p75 = []
+	for col in np.transpose(data):
+		maxs.append(np.amax(col))
+		mins.append(np.amin(col))
+		mean.append(np.mean(col))
+		std.append(np.std(col))	
+		p25.append(np.percentile(col,25))
+		p50.append(np.percentile(col,50))
+		p75.append(np.percentile(col,75))
+	#maxs = np.array(maxs)
+	#mins = np.array(mins)
+	stats = [maxs, mins, mean, std, p25, p50, p75]
+	np.savetxt("mydata.csv", np.transpose(np.array(stats))[inds], delimiter=',')
+	print np.transpose(np.array(stats))[inds]
 
 def correlationCoeffMatrix(filename):
 	dataset = loadCsv(filename)
@@ -94,6 +142,7 @@ def classifierStats(y, y_pred):
 	fp = 0
 	vn = 0
 	for i in range(0,np.shape(y_pred)[0]):
+		if y[i] != y_pred[i]: mislabeled = mislabeled + 1
 		if y[i] == 1 and y_pred[i] == 1:
 			vp = vp + 1
 		elif y[i] == -1 and y_pred[i] == 1:
@@ -107,6 +156,7 @@ def classifierStats(y, y_pred):
 	print "FP = ", fp
 	print "FN = ", fn
 	print "VN = ", vn 
+	print "mislabeled :", mislabeled
 
 def bayesianClassifier(data, target):
 	gnb = GaussianNB()
@@ -117,6 +167,12 @@ def bayesianClassifier(data, target):
 	y_pred = gnb.fit(data, target).predict(data)
 	classifierStats(target, y_pred)
 
+def quadraticClassifier(data, target):
+	clf = QuadraticDiscriminantAnalysis()
+	clf.fit(data, target)
+	y_pred = clf.predict(data)
+	classifierStats(target,y_pred)
+	
 def LogisticRegression(data, target):
 	logreg = linear_model.LogisticRegression(C=1e5)
 	logreg.fit(data, target)
@@ -128,14 +184,14 @@ def LogisticRegression(data, target):
 	Z = logreg.predict(data)
 	classifierStats(target,Z)
 
+np.set_printoptions(suppress=True)
 
 ## Distance matrix and outline removal
 data, target = loadCsv('data2.csv')
-
+statistics(data)
 dataset_np = np.array(data)
 target_np = np.array(target)
 #sort by class 1st column
-#np.set_printoptions(threshold=np.nan)
 inds = target_np.argsort()
 target_np = target_np[inds[::1]]
 dataset_np = dataset_np[inds[::1]]
@@ -145,8 +201,10 @@ dist = distanceMatrix(dataset_zs)
 dataset_clean, target_clean = removeOutliersByDistance(dataset_zs, target_np, dist, 0.1)
 dist_clean = distanceMatrix(dataset_clean)
 
-bayesianClassifier(dataset_clean, target_clean)
-LogisticRegression(dataset_clean, target_clean)
-
-
+print "Bayesian Classifier"
+bayesianClassifier(dataset_np, target_np)
+print "LogisticRegression"
+LogisticRegression(dataset_np, target_np)
+print "Quadratic Bayesian Classifier"
+quadraticClassifier(dataset_np, target_np)	
 
