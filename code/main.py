@@ -27,24 +27,18 @@ def loadCsv(filename):
 			target.append(int(row[0]))
 	return data, target
 
-def splitDataset(dataset, splitRatio):
+def splitDataset(dataset, target, splitRatio):
 	trainSize = int(len(dataset) * splitRatio)
-	trainSet = []
-	copy = list(dataset)
-	while len(trainSet) < trainSize:
+	data_train = []
+	target_train = []
+	copy = dataset
+	tcopy = target
+	while len(data_train) < trainSize:
 		index = random.randrange(len(copy))
-		trainSet.append(copy.pop(index))
-	return [trainSet, copy]
+		data_train.append(copy.pop(index))
+		target_train.append(tcopy.pop(index))
+	return data_train, copy, target_train, tcopy
 
-import random
-def splitDataset(dataset, splitRatio):
-	trainSize = int(len(dataset) * splitRatio)
-	trainSet = []
-	copy = list(dataset)
-	while len(trainSet) < trainSize:
-		index = random.randrange(len(copy))
-		trainSet.append(copy.pop(index))
-	return [trainSet, copy]
 def statistics(data, individual=None):
 	inds = []
 	for i in range(0,10):
@@ -67,11 +61,9 @@ def statistics(data, individual=None):
 		p25.append(np.percentile(col,25))
 		p50.append(np.percentile(col,50))
 		p75.append(np.percentile(col,75))
-	#maxs = np.array(maxs)
-	#mins = np.array(mins)
 	stats = [maxs, mins, mean, std, p25, p50, p75]
 	np.savetxt("mydata.csv", np.transpose(np.array(stats))[inds], delimiter=',')
-	print np.transpose(np.array(stats))[inds]
+	#print np.transpose(np.array(stats))[inds]
 
 def correlationCoeffMatrix(filename):
 	dataset = loadCsv(filename)
@@ -85,19 +77,9 @@ def correlationCoeffMatrix(filename):
 
 # zscore of the nparray 
 def zscore(nparray):
-	#saves first column (output var)
-	#matrix=np.asmatrix(nparray)
-	#output=matrix[:,0]
-	#utput_np=np.asarray(output)
-
-	# Calculate zscore without output var
-	#c = np.delete(nparray,0,1)
 	ctrans = np.transpose(nparray)
 	ctranspad = stats.zscore(ctrans)
 	cpad = np.transpose(ctranspad)
-
-	# Add output var again
-	#data_zscore = np.concatenate((output_np, cpad), axis=1)
 	return cpad
 	
 # euclidean distance matrix of a np array
@@ -158,53 +140,66 @@ def classifierStats(y, y_pred):
 	print "VN = ", vn 
 	print "mislabeled :", mislabeled
 
-def bayesianClassifier(data, target):
+def bayesianClassifier(data_train, data_test, target_train, target_test):
 	gnb = GaussianNB()
-	#data = np.delete(dataset_clean,0,1)
-	#matrix=np.asmatrix(dataset_clean)
-	#output=matrix[:,0]
-	#target=np.asarray(output) 
-	y_pred = gnb.fit(data, target).predict(data)
-	classifierStats(target, y_pred)
+	y_pred = gnb.fit(data_train, target_train).predict(data_test)
+	classifierStats(target_test, y_pred)
 
-def quadraticClassifier(data, target):
+def quadraticClassifier(data_train, data_test, target_train, target_test):
 	clf = QuadraticDiscriminantAnalysis()
-	clf.fit(data, target)
-	y_pred = clf.predict(data)
-	classifierStats(target,y_pred)
+	clf.fit(data_train, target_train)
+	y_pred = clf.predict(data_test)
+	classifierStats(target_test,y_pred)
 	
-def LogisticRegression(data, target):
+def logisticRegression(data_train, data_test, target_train, target_test):
 	logreg = linear_model.LogisticRegression(C=1e5)
-	logreg.fit(data, target)
-	#h = .02
-	#x_min, x_max = data[:, 0].min() - .5, data[:, 0].max() + .5
-	#y_min, y_max = data[:, 1].min() - .5, data[:, 1].max() + .5
-	#xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
-	#Z = logreg.predict(np.c_[xx.ravel(), yy.ravel()])
-	Z = logreg.predict(data)
-	classifierStats(target,Z)
+	logreg.fit(data_train, target_train)
+	Z = logreg.predict(data_test)
+	classifierStats(target_test,Z)
 
-np.set_printoptions(suppress=True)
+def distance():
+	#sort by class 1st column
+	inds = target_np.argsort()
+	target_np = target_np[inds[::1]]
+	dataset_np = dataset_np[inds[::1]]
+	#dataset_np = dataset_np[dataset_np[:,1].argsort()] NO
+	dataset_zs = zscore(dataset_np)
+	dist = distanceMatrix(dataset_zs)
+	dataset_clean, target_clean = removeOutliersByDistance(dataset_zs, target_np, dist, 0.1)
+	dist_clean = distanceMatrix(dataset_clean)
+	return dataset_clean, target_clean
 
-## Distance matrix and outline removal
-data, target = loadCsv('data2.csv')
-statistics(data)
-dataset_np = np.array(data)
-target_np = np.array(target)
-#sort by class 1st column
-inds = target_np.argsort()
-target_np = target_np[inds[::1]]
-dataset_np = dataset_np[inds[::1]]
-#dataset_np = dataset_np[dataset_np[:,1].argsort()] NO
-dataset_zs = zscore(dataset_np)
-dist = distanceMatrix(dataset_zs)
-dataset_clean, target_clean = removeOutliersByDistance(dataset_zs, target_np, dist, 0.1)
-dist_clean = distanceMatrix(dataset_clean)
 
-print "Bayesian Classifier"
-bayesianClassifier(dataset_np, target_np)
-print "LogisticRegression"
-LogisticRegression(dataset_np, target_np)
-print "Quadratic Bayesian Classifier"
-quadraticClassifier(dataset_np, target_np)	
+def main():
+	np.set_printoptions(suppress=True)
+	## Distance matrix and outlier removal
+	data, target = loadCsv('data2.csv')
+	#statistics(data)
+	splitratio = 0.67
 
+	
+	data_train = data[0:467]
+	data_test = data[468:568]	
+
+	target_train = target[0:467]
+	target_test = target[468:568]	
+	data_train, data_test, target_train, target_test = splitDataset(data, target, splitratio)
+	
+	data_train = np.array(data_train)
+	data_test = np.array(data_test)
+	target_train = np.array(target_train)
+	target_test = np.array(target_test)
+	dataset_np = np.array(data)
+	target_np = np.array(target)
+	
+#	dataset_clean, target_clean = distance();
+	
+	print "Bayesian Classifier"
+	bayesianClassifier(data_train, data_test, target_train, target_test)
+	print "LogisticRegression"
+	logisticRegression(data_train, data_test, target_train, target_test)
+	print "Quadratic Bayesian Classifier"
+	quadraticClassifier(data_train, data_test, target_train, target_test)
+
+if __name__ == "__main__":
+    main()
