@@ -31,8 +31,8 @@ def splitDataset(dataset, target, splitRatio):
 	trainSize = int(len(dataset) * splitRatio)
 	data_train = []
 	target_train = []
-	copy = dataset
-	tcopy = target
+	copy = list(dataset)
+	tcopy = list(target)
 	while len(data_train) < trainSize:
 		index = random.randrange(len(copy))
 		data_train.append(copy.pop(index))
@@ -133,31 +133,32 @@ def classifierStats(y, y_pred):
 			fn = fn + 1
 		elif y[i] == -1 and y_pred[i] == -1:	
 			vn = vn + 1
-	#print "Number of mislabeled points out of a total", np.shape(data)[0],  "points :", mislabeled
 	print "VP = ", vp
 	print "FP = ", fp
 	print "FN = ", fn
 	print "VN = ", vn 
 	print "mislabeled :", mislabeled
+	return [vp, fp, fn, vn]
 
 def bayesianClassifier(data_train, data_test, target_train, target_test):
 	gnb = GaussianNB()
 	y_pred = gnb.fit(data_train, target_train).predict(data_test)
-	classifierStats(target_test, y_pred)
+	return classifierStats(target_test, y_pred)
 
 def quadraticClassifier(data_train, data_test, target_train, target_test):
 	clf = QuadraticDiscriminantAnalysis()
 	clf.fit(data_train, target_train)
 	y_pred = clf.predict(data_test)
-	classifierStats(target_test,y_pred)
+ 	return classifierStats(target_test,y_pred)
 	
 def logisticRegression(data_train, data_test, target_train, target_test):
 	logreg = linear_model.LogisticRegression(C=1e5)
 	logreg.fit(data_train, target_train)
 	Z = logreg.predict(data_test)
-	classifierStats(target_test,Z)
+	return classifierStats(target_test,Z)
 
-def distance():
+## Distance matrix and outlier removal
+def distanceMatOut():
 	#sort by class 1st column
 	inds = target_np.argsort()
 	target_np = target_np[inds[::1]]
@@ -172,34 +173,32 @@ def distance():
 
 def main():
 	np.set_printoptions(suppress=True)
-	## Distance matrix and outlier removal
 	data, target = loadCsv('data2.csv')
 	#statistics(data)
 	splitratio = 0.67
 
+#	dataset_clean, target_clean = distanceMatOut();
+	bayes_simple = []
+	logreg = []
+	bayes_quad = []
+	for i in range(0,10000):
+		data_train, data_test, target_train, target_test = splitDataset(data, target, splitratio)
+		print "Bayesian Classifier"
+		stats = bayesianClassifier(data_train, data_test, target_train, target_test)
+		bayes_simple.append(stats)
+		print "LogisticRegression"
+		stats = logisticRegression(data_train, data_test, target_train, target_test)
+		logreg.append(stats)
+		print "Quadratic Bayesian Classifier"
+		stats = quadraticClassifier(data_train, data_test, target_train, target_test)
+		bayes_quad.append(stats)
 	
-	data_train = data[0:467]
-	data_test = data[468:568]	
-
-	target_train = target[0:467]
-	target_test = target[468:568]	
-	data_train, data_test, target_train, target_test = splitDataset(data, target, splitratio)
-	
-	data_train = np.array(data_train)
-	data_test = np.array(data_test)
-	target_train = np.array(target_train)
-	target_test = np.array(target_test)
-	dataset_np = np.array(data)
-	target_np = np.array(target)
-	
-#	dataset_clean, target_clean = distance();
-	
-	print "Bayesian Classifier"
-	bayesianClassifier(data_train, data_test, target_train, target_test)
+	print "Bayesian Classifier"	
+	print np.mean(np.transpose(np.array(bayes_simple)), axis=1)
 	print "LogisticRegression"
-	logisticRegression(data_train, data_test, target_train, target_test)
+	print np.mean(np.transpose(np.array(logreg)), axis=1)
 	print "Quadratic Bayesian Classifier"
-	quadraticClassifier(data_train, data_test, target_train, target_test)
-
+	print np.mean(np.transpose(np.array(bayes_quad)), axis=1)
+	
 if __name__ == "__main__":
     main()
