@@ -8,6 +8,7 @@ import random
 from scipy import stats
 from sklearn.naive_bayes import GaussianNB
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.neural_network import MLPClassifier
 from sklearn import linear_model
 
 variable_names = ['Diag', 'Radius Mean', 'Texture Mean', 'Perimeter Mean', 'Area Mean', 'Smoothness Mean', 'Compactness Mean', 'Concavity Mean', 'Concave Points Mean',    'Symmetry Mean', 'Fractal Dimension Mean',	'Radius SE', 'Texture SE', 'Perimeter SE', 'Area SE', 'Smoothness SE', 'Compactness SE', 'Concavity SE',     'Concave points SE', 'Symmetry SE', 'Fractal Dimension SE',	'Radius Worst',	'Texture Worst', 'Perimeter Worst', 'Area Worst', 'Smoothness Worst',     'Compactness Worst',	'Concavity Worst', 'Concave Points Worst',	'Symmetry Worst', 'Fractal Dimension Worst']
@@ -157,6 +158,12 @@ def logisticRegression(data_train, data_test, target_train, target_test):
 	Z = logreg.predict(data_test)
 	return classifierStats(target_test,Z)
 
+def multiLayerPerceptron(data_train, data_test, target_train, target_test):
+	clf = MLPClassifier(solver='lbfgs', activation='tanh', max_iter=1000, hidden_layer_sizes=(100,100))
+	clf.fit(data_train, target_train)	
+	y_pred = clf.predict(data_test)
+	return classifierStats(target_test,y_pred)
+
 ## Distance matrix and outlier removal
 def distanceMatOut():
 	#sort by class 1st column
@@ -175,14 +182,16 @@ def main():
 	np.set_printoptions(suppress=True)
 	data, target = loadCsv('data2.csv')
 	#statistics(data)
-	splitratio = 0.67
+	splitratio = 0.80
 
 #	dataset_clean, target_clean = distanceMatOut();
 	bayes_simple = []
 	logreg = []
 	bayes_quad = []
-	for i in range(0,10000):
+	for i in range(0,1):
+		print "MLP"
 		data_train, data_test, target_train, target_test = splitDataset(data, target, splitratio)
+		multiLayerPerceptron(data_train, data_test, target_train, target_test)
 		print "Bayesian Classifier"
 		stats = bayesianClassifier(data_train, data_test, target_train, target_test)
 		bayes_simple.append(stats)
