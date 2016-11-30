@@ -6,6 +6,7 @@ import sys, getopt
 import matplotlib.pyplot as plt
 import random
 from scipy import stats
+from sklearn.preprocessing import StandardScaler 
 from sklearn.naive_bayes import GaussianNB
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neural_network import MLPClassifier
@@ -158,8 +159,14 @@ def logisticRegression(data_train, data_test, target_train, target_test):
 	Z = logreg.predict(data_test)
 	return classifierStats(target_test,Z)
 
+def perceptron(data_train, data_test, target_train, target_test):
+	prp = linear_model.Perceptron(penalty=None, class_weight='balanced')
+	prp.fit(data_train, target_train)
+	y_pred = prp.predict(data_test)
+	return classifierStats(target_test,y_pred)
+
 def multiLayerPerceptron(data_train, data_test, target_train, target_test):
-	clf = MLPClassifier(solver='lbfgs', activation='tanh', max_iter=1000, hidden_layer_sizes=(100,100))
+	clf = MLPClassifier(solver='sgd', activation='tanh', max_iter=1000, hidden_layer_sizes=(100,))
 	clf.fit(data_train, target_train)	
 	y_pred = clf.predict(data_test)
 	return classifierStats(target_test,y_pred)
@@ -182,16 +189,15 @@ def main():
 	np.set_printoptions(suppress=True)
 	data, target = loadCsv('data2.csv')
 	#statistics(data)
-	splitratio = 0.80
+	splitratio = 0.70
 
 #	dataset_clean, target_clean = distanceMatOut();
 	bayes_simple = []
 	logreg = []
 	bayes_quad = []
 	for i in range(0,1):
-		print "MLP"
 		data_train, data_test, target_train, target_test = splitDataset(data, target, splitratio)
-		multiLayerPerceptron(data_train, data_test, target_train, target_test)
+		#data_train = zscore(data_train)
 		print "Bayesian Classifier"
 		stats = bayesianClassifier(data_train, data_test, target_train, target_test)
 		bayes_simple.append(stats)
@@ -201,6 +207,16 @@ def main():
 		print "Quadratic Bayesian Classifier"
 		stats = quadraticClassifier(data_train, data_test, target_train, target_test)
 		bayes_quad.append(stats)
+		#data_test = zscore(data_test)
+		scaler = StandardScaler()  
+		scaler.fit(data_train)  
+		data_train = scaler.transform(data_train)  
+		data_test = scaler.transform(data_test)  
+		print "Perceptron"
+		perceptron(data_train, data_test, target_train, target_test)
+		print "MLP"
+		multiLayerPerceptron(data_train, data_test, target_train, target_test)
+		
 	
 	print "Bayesian Classifier"	
 	print np.mean(np.transpose(np.array(bayes_simple)), axis=1)

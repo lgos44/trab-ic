@@ -66,7 +66,7 @@ Inicialmente é importante ressaltar que o conjunto de dados gerado pelos exames
 \item Dimensão Fractal
 \end{enumerate}
 
-De forma a eliminar a terceira dimensão (do conjunto de células), para cada conjunto de células o \textit{UCI Machine Learning} fornceu o dataset com valores de média, desvio(erro) padrão e o pior valor dos atributos no universo das células, resultando em 30 variáveis de entrada. O dataset conforme obtido possui as variáveis como segue:
+De forma a eliminar a terceira dimensão (do conjunto de células), para cada conjunto de células o \textit{UCI Machine Learning} forneceu o dataset com valores de média, desvio(erro) padrão e o pior valor dos atributos no universo das células, resultando em 30 variáveis de entrada. O dataset conforme obtido possui as variáveis como segue:
 
 \begin{multicols}{3}
 \begin{itemize}
@@ -711,10 +711,21 @@ Como o conjunto de dados contém variáveis em unidades e escalas diferentes, o 
 Consiste em um problema de classificação. Deseja-se desenvolver um classificador capaz de predizer a classe do registro (maligno ou benigno).
 
 Para solução deste problema serão aplicados os modelos de classificação a seguir e avaliados os resultados.
-\subsection{Classificador Bayesiano Simples}
-\subsection{Classificador Bayesiano Quadrático}
-\subsection{Mínimos Quadrados}
-\subsection{Regressão Logística}
+
+\begin{itemize}
+\item Classificador Bayesiano Simples
+\item Classificador Bayesiano Quadrático
+\item Regressão Logística
+\item Perceptron Múltiplas Camadas
+\end{itemize}
+
+Para os testes a seguinte metodologia será usada. O dataset é dividido em uma razão de $67\%$ dos dados para treinamento e $33\%$ dos dados para teste. Para avaliar o desempenho do classificador, os resultados preditos pelo teste é comparado com os resultados reais e contabilizada a matriz de confusão. A partir dela são calculados as seguintes métricas:
+\begin{itemize}
+\item Acurácia
+\item Erro global
+\item Precisão 
+\item Recuperação
+\end{itemize}
 
 \section{Apresentação da Tecnologia}
 Para a implementação e execução dos algoritmos serão usadas as seguintes ferramentas, conforme se mostrarem mais adequadas para a tarefa em questão.
@@ -736,6 +747,31 @@ Possui o seguinte \textit{Toolbox}
 \begin{itemize}
 \item Statistics and Machine Learning Toolbox
 \end{itemize}
+
+\section{Classificador Bayesiano Simples}
+
+O Classificador Bayesiano baseia-se na aplicação do Teorema de Bayes com a suposição de independência entre cada par de variáveis. 
+
+\section{Classificador Bayesiano Quadrático}
+\section{Regressão Logística}
+\section{Perceptron}
+O Perceptron utiliza o modelo McCulloch-Pitts para o neurônio artificial. O processamento de cada unidade é dado por:
+\[ u(t) = h(z(t)) = h \left( \theta_0 + \sum_{i=1}^n x_i(t) \theta_i \right) \]
+onde:
+
+$u(t)$: valor de ativação
+
+$z(t)$: potencial de ativaçãos
+
+$h$: função de ativação
+
+$x_i(t)$: entradas do neurônio
+
+O Perceptron incorpora o conceito de aprendizado, ou seja, se o padrão é classificado corretamente nenhum ajuste é realizado.
+\section{Perceptron de Múltiplas Camadas (MLP)}
+Uma rede-neural MLP apresenta uma camada de entrada que não realiza processamento, uma ou mais camadas intermediárias que realizam processamento e uma camada de saída que, num problema de classificação é o vetor com as estimativas das variáveis indicadoras. O modelo McCulloch-Pitts é utilizado nas unidades das camadas intermediárias e de saída.
+
+
 
 
 \begin{table}[]
@@ -762,12 +798,12 @@ Máximo  & Mínimo   & Média    & Desvio Padrão & P 25 & P 50 & P 75 \\
 0.3454  & 0.01938  & 0.1043   & 0.05281       & 0.06492      & 0.09263      & 0.1304       \\
 0.1354  & 0.002252 & 0.02548  & 0.01791       & 0.01308      & 0.02045      & 0.03245      \\
 1.058   & 0.02729  & 0.2543   & 0.1573        & 0.1472       & 0.2119       & 0.3391       \\
-0.4268  & 0			 & 0.0888   & 0.07972       & 0.02956      & 0.06154      & 0.1307       \\
-0.396   & 0  		 & 0.03189  & 0.03019       & 0.01509      & 0.02589      & 0.04205      \\
+0.4268  & 0		   & 0.0888   & 0.07972       & 0.02956      & 0.06154      & 0.1307       \\
+0.396   & 0  	   & 0.03189  & 0.03019       & 0.01509      & 0.02589      & 0.04205      \\
 1.252   & 0        & 0.2722   & 0.2086        & 0.1145       & 0.2267       & 0.3829       \\
 0.2012  & 0        & 0.04892  & 0.0388        & 0.02031      & 0.0335       & 0.074        \\
-0.05279 & 0  		 & 0.0118   & 0.00617       & 0.007638     & 0.01093      & 0.01471      \\
-0.291   & 0			 & 0.1146   & 0.06573       & 0.06493      & 0.09993      & 0.1614       \\
+0.05279 & 0  	   & 0.0118   & 0.00617       & 0.007638     & 0.01093      & 0.01471      \\
+0.291   & 0		   & 0.1146   & 0.06573       & 0.06493      & 0.09993      & 0.1614       \\
 0.304   & 0.106    & 0.1812   & 0.02741       & 0.1619       & 0.1792       & 0.1957       \\
 0.07895 & 0.007882 & 0.02054  & 0.008266      & 0.01516      & 0.01873      & 0.02348      \\
 0.6638  & 0.1565   & 0.2901   & 0.06187       & 0.2504       & 0.2822       & 0.3179       \\
