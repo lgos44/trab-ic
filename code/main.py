@@ -41,6 +41,16 @@ def splitDataset(dataset, target, splitRatio):
 		target_train.append(tcopy.pop(index))
 	return data_train, copy, target_train, tcopy
 
+def kfoldSplit(dataset, target, cicles, index):
+	size = int(len(dataset)/cicles)+1
+	end = (index+1)*size
+	if end > len(dataset): end = len(dataset)
+	data_train = [dataset[i] for i in range(0,index*size)+range((index+1)*size,len(dataset))]
+	data_test = [dataset[i] for i in range(index*size,  end)]
+	target_train = [target[i] for i in range(0,index*size)+range((index+1)*size,len(dataset))]
+	target_test = [target[i] for i in range(index*size,  end)]
+	return data_train, data_test, target_train, target_test
+
 def statistics(data, individual=None):
 	inds = []
 	for i in range(0,10):
@@ -166,7 +176,7 @@ def perceptron(data_train, data_test, target_train, target_test):
 	return classifierStats(target_test,y_pred)
 
 def multiLayerPerceptron(data_train, data_test, target_train, target_test):
-	clf = MLPClassifier(solver='sgd', activation='tanh', max_iter=1000, hidden_layer_sizes=(100,))
+	clf = MLPClassifier(solver='sgd', activation='tanh', max_iter=1000, hidden_layer_sizes=(21,))
 	clf.fit(data_train, target_train)	
 	y_pred = clf.predict(data_test)
 	return classifierStats(target_test,y_pred)
@@ -189,14 +199,16 @@ def main():
 	np.set_printoptions(suppress=True)
 	data, target = loadCsv('data2.csv')
 	#statistics(data)
-	splitratio = 0.70
-
-#	dataset_clean, target_clean = distanceMatOut();
+	
+	#dataset_clean, target_clean = distanceMatOut();
 	bayes_simple = []
 	logreg = []
 	bayes_quad = []
-	for i in range(0,1):
-		data_train, data_test, target_train, target_test = splitDataset(data, target, splitratio)
+	percep = []
+	mlp = []
+
+	for i in range(0,10):
+		data_train, data_test, target_train, target_test = kfoldSplit(data, target, 10, i)
 		#data_train = zscore(data_train)
 		print "Bayesian Classifier"
 		stats = bayesianClassifier(data_train, data_test, target_train, target_test)
@@ -207,15 +219,18 @@ def main():
 		print "Quadratic Bayesian Classifier"
 		stats = quadraticClassifier(data_train, data_test, target_train, target_test)
 		bayes_quad.append(stats)
+
 		#data_test = zscore(data_test)
 		scaler = StandardScaler()  
 		scaler.fit(data_train)  
 		data_train = scaler.transform(data_train)  
 		data_test = scaler.transform(data_test)  
 		print "Perceptron"
-		perceptron(data_train, data_test, target_train, target_test)
+		stats = perceptron(data_train, data_test, target_train, target_test)
+		percep.append(stats)
 		print "MLP"
-		multiLayerPerceptron(data_train, data_test, target_train, target_test)
+		stats = multiLayerPerceptron(data_train, data_test, target_train, target_test)
+		mlp.append(stats)
 		
 	
 	print "Bayesian Classifier"	
@@ -224,6 +239,10 @@ def main():
 	print np.mean(np.transpose(np.array(logreg)), axis=1)
 	print "Quadratic Bayesian Classifier"
 	print np.mean(np.transpose(np.array(bayes_quad)), axis=1)
+	print "Perceptron"
+	print np.mean(np.transpose(np.array(percep)), axis=1)
+	print "MLP"
+	print np.mean(np.transpose(np.array(mlp)), axis=1)
 	
 if __name__ == "__main__":
     main()
