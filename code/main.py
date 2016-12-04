@@ -1,5 +1,5 @@
-#!/usr/bin/python
-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import numpy as np
 import csv
 import sys, getopt
@@ -194,6 +194,32 @@ def distanceMatOut():
 	dist_clean = distanceMatrix(dataset_clean)
 	return dataset_clean, target_clean
 
+def plotPREREC(confmat, name):
+	width = 0.5
+	ind1 = [1,1+width+.1]
+	ind2 = [4,4+width+.1]
+	ind = np.arange(7) 
+	
+	vp = confmat[0]
+	fp = confmat[1]
+	fn = confmat[2]
+	vn = confmat[3]
+	pre_c1 = vp/(vp+fp)
+	pre_c2 = vn/(vn+fn)
+	rec_c1 = vp/(vp+fn)
+	rec_c2 = vn/(vn+fp)
+	p1 = plt.bar(ind1, [pre_c1,rec_c1], width, color='r')
+	p2 = plt.bar(ind2, [pre_c2,rec_c2], width, color='b')
+	plt.ylabel('PRE/REC')
+	plt.title('Precisao e Recall')
+	plt.yticks(np.arange(0, 1, 0.1))
+	plt.legend((p1[0], p2[0]), ('C1', 'C2'))
+	#plt.xticks(ind + width/2.)
+	plt.xticks([0,(ind1[0]+ind1[1]+width)/2,(ind2[0]+ind2[1]+width)/2,6],('','C1','C2',''))
+	plt.savefig(name)
+
+def saveConfMat(confmat, name):
+	np.savetxt(name, confmat.reshape(2,2,order='F'), fmt='%.2f', delimiter='&', newline='\\\\ \n')
 
 def main():
 	np.set_printoptions(suppress=True)
@@ -234,15 +260,39 @@ def main():
 		
 	
 	print "Bayesian Classifier"	
-	print np.mean(np.transpose(np.array(bayes_simple)), axis=1)
+	conf_bayes = np.mean(np.transpose(np.array(bayes_simple)), axis=1)
+	base_name = 'naive_bayes'
+	plotPREREC(conf_bayes, '../img/'+ base_name + '_rec.png')
+	saveConfMat(conf_bayes, base_name + '_conf.csv')
+	print conf_bayes
+
 	print "LogisticRegression"
-	print np.mean(np.transpose(np.array(logreg)), axis=1)
+	conf_logreg = np.mean(np.transpose(np.array(logreg)), axis=1)
+	base_name = 'log_reg'
+	plotPREREC(conf_logreg, '../img/'+ base_name + '_rec.png')
+	saveConfMat(conf_logreg, base_name + '_conf.csv')
+	print conf_logreg
+
 	print "Quadratic Bayesian Classifier"
-	print np.mean(np.transpose(np.array(bayes_quad)), axis=1)
+	conf_quad_bayes = np.mean(np.transpose(np.array(bayes_quad)), axis=1)
+	print conf_quad_bayes
+	base_name = 'quad_bayes'
+	plotPREREC(conf_quad_bayes, '../img/'+ base_name + '_rec.png')
+	saveConfMat(conf_quad_bayes, base_name + '_conf.csv')
+
 	print "Perceptron"
-	print np.mean(np.transpose(np.array(percep)), axis=1)
+	conf_perc = np.mean(np.transpose(np.array(percep)), axis=1)
+	print conf_perc
+	base_name = 'perc'
+	plotPREREC(conf_perc, '../img/'+ base_name + '_rec.png')
+	saveConfMat(conf_perc, base_name + '_conf.csv')
+
 	print "MLP"
-	print np.mean(np.transpose(np.array(mlp)), axis=1)
-	
+	conf_mlp = np.mean(np.transpose(np.array(mlp)), axis=1)
+	print conf_mlp
+	base_name = 'mlp'
+	plotPREREC(conf_mlp, '../img/'+ base_name + '_rec.png')
+	saveConfMat(conf_mlp, base_name + '_conf.csv')
+
 if __name__ == "__main__":
     main()
