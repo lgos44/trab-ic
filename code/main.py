@@ -150,6 +150,7 @@ def classifierStats(y, y_pred):
 	print "FN = ", fn
 	print "VN = ", vn 
 	print "mislabeled :", mislabeled
+	print "ACC = ", (vp+vn)/(vp+fp+fn+vn) 
 	return [vp, fp, fn, vn]
 
 def bayesianClassifier(data_train, data_test, target_train, target_test):
@@ -208,6 +209,8 @@ def plotPREREC(confmat, name):
 	pre_c2 = vn/(vn+fn)
 	rec_c1 = vp/(vp+fn)
 	rec_c2 = vn/(vn+fp)
+	print pre_c1, rec_c1, pre_c2, rec_c2
+	print 'AUC = ' (rec_c1+rec_c2)/2 
 	p1 = plt.bar(ind1, [pre_c1,rec_c1], width, color='r')
 	p2 = plt.bar(ind2, [pre_c2,rec_c2], width, color='b')
 	plt.ylabel('PRE/REC')
@@ -216,7 +219,8 @@ def plotPREREC(confmat, name):
 	plt.legend((p1[0], p2[0]), ('C1', 'C2'))
 	#plt.xticks(ind + width/2.)
 	plt.xticks([0,(ind1[0]+ind1[1]+width)/2,(ind2[0]+ind2[1]+width)/2,6],('','C1','C2',''))
-	plt.savefig(name)
+	plt.show()
+	#plt.savefig(name)
 
 def saveConfMat(confmat, name):
 	np.savetxt(name, confmat.reshape(2,2,order='F'), fmt='%.2f', delimiter='&', newline='\\\\ \n')
