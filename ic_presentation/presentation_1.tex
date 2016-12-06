@@ -291,7 +291,13 @@ $x = [x_1, \dots, x_n] $ é o vetor de entrada
 \begin{columns}[c] 
 \column{.45\textwidth} % Left column and width
 \begin{itemize}
-\item ACC = 0.94
+\item $ACC = 93.67 \%$
+\item $AUC = 0.9266 $
+
+\item $PRE(C1) = 0.94$
+\item $REC(C1) = 0.8868$
+\item $PRE(C2) = 0.9350$
+\item $REC(C2) = 0.9664$
 \end{itemize}
 
 \begin{table}
@@ -342,7 +348,13 @@ $C_2$ &  1.20&34.50\\
 \begin{columns}[c] 
 \column{.45\textwidth} % Left column and width
 \begin{itemize}
-\item ACC = 0.96
+\item $ACC = 95.78 \%$
+\item $AUC = 0.9549 $
+
+\item $PRE(C1) = 0.9434$
+\item $REC(C1) = 0.9434$
+\item $PRE(C2) = 0.9664$
+\item $REC(C2) = 0.9664$
 \end{itemize}
 
 \begin{table}
@@ -398,7 +410,12 @@ Onde:
 \begin{columns}[c] 
 \column{.45\textwidth} % Left column and width
 \begin{itemize}
-\item ACC = 0.96
+\item $ACC = 95.96 \%$
+\item $AUC = 0.9563 $
+\item $PRE(C1) = 0.9479$
+\item $REC(C1) = 0.9434$
+\item $PRE(C2) = 0.9665$
+\item $REC(C2) = 0.9692$
 \end{itemize}
 
 \begin{table}
@@ -408,7 +425,6 @@ Onde:
 \midrule
 $C_1$ & 20.00&1.20\\ 
 $C_2$ & 1.10&34.60\\ 
-
 \bottomrule
 \end{tabular}
 \caption{Matriz de confusão}
@@ -483,7 +499,12 @@ class sklearn.linear_model.Perceptron(penalty=None,
 \begin{columns}[c] 
 \column{.45\textwidth} % Left column and width
 \begin{itemize}
-\item ACC = 0.96
+\item $ACC = 96.13 \%$
+\item $AUC = 0.9615 $
+\item $PRE(C1) = 0.9358$
+\item $REC(C1) = 0.9623$
+\item $PRE(C2) = 0.9772$
+\item $REC(C2) = 0.9608$
 \end{itemize}
 
 \begin{table}
@@ -536,6 +557,7 @@ $C_2$ & 1.40&34.30\\
 \[ u(t) = \frac{1- exp(-z(t))}{1+exp(-z(t))}\]
 \end{block}
 \item Método de ajuste dos parâmetros: Gradiente descendente estocástico
+\item Aprendizado através do Backpropagation
 \end{itemize}
 \end{frame}
 
@@ -581,14 +603,11 @@ random_state=None, tol=0.0001, verbose=False,
 
 \begin{frame}
 \frametitle{Perceptron de Múltiplas Camadas - Resultados}
-\textbf{Avaliação dos resultados}
+\textbf{Avaliação dos resultados para uma camada intermediária com 21 neurônios}
 \begin{columns}[c] 
 \column{.45\textwidth} % Left column and width
-\begin{itemize}
-\item ACC = 0.97
-\end{itemize}
-
 \begin{table}
+%\caption{Matriz de confusão}
 \begin{tabular}{l l l}
 \toprule
  & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
@@ -597,9 +616,15 @@ $C_1$ & 20.20&1.00\\
 $C_2$ & 0.40&35.30\\ 
 \bottomrule
 \end{tabular}
-\caption{Matriz de confusão}
+\begin{itemize}
+\item $ACC = 97.35 \%$
+\item $AUC = 97.08 \%$
+\item $PRE(C1) = 0.9806$
+\item $REC(C1) = 0.9528$
+\item $PRE(C2) = 0.9725$
+\item $REC(C2) = 0.9888$
+\end{itemize}
 \end{table}
-
 
 \column{.5\textwidth} % Right column and width
 \begin{figure}[H]
@@ -610,7 +635,78 @@ $C_2$ & 0.40&35.30\\
 \end{figure}%
 
 \end{columns}
+\end{frame}
 
+\begin{frame}
+\frametitle{Perceptron de Múltiplas Camadas - Resultados}
+\textbf{Camada intermediária com 100 neurônios}
+\begin{columns}[c] 
+\column{.45\textwidth} % Left column and width
+\begin{table}
+%\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\toprule
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\midrule
+$C_1$ & 20.40 & 0.80 \\
+$C_2$ & 0.30  & 35.40\\ 
+\bottomrule
+\end{tabular}
+\begin{itemize}
+\item $ACC = 98.07 \%$
+\item $AUC = 0.9769  $
+\item $PRE(C1) = 0.9855$
+\item $REC(C1) = 0.9623$
+\item $PRE(C2) = 0.9779$
+\item $REC(C2) = 0.9916$
+\end{itemize}
+\end{table}
+
+\column{.5\textwidth} % Right column and width
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/mlp_100.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}%
+
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Perceptron de Múltiplas Camadas - Resultados}
+\textbf{Camadas intermediárias (10,10)}
+\begin{columns}[c] 
+\column{.45\textwidth} % Left column and width
+\begin{table}
+%\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\toprule
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\midrule
+$C_1$ & 20.30 & 0.90 \\
+$C_2$ & 0.30  & 35.40\\ 
+\bottomrule
+\end{tabular}
+\begin{itemize}
+\item $ACC = 97.89 \%$
+\item $AUC = 0.9746  $
+\item $PRE(C1) = 0.9854$
+\item $REC(C1) = 0.9575$
+\item $PRE(C2) = 0.9752$
+\item $REC(C2) = 0.9916$
+\end{itemize}
+\end{table}
+
+\column{.5\textwidth} % Right column and width
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/mlp_10x10.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}%
+
+\end{columns}
 \end{frame}
 
 \end{document} 

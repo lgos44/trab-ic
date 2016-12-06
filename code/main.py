@@ -11,6 +11,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neural_network import MLPClassifier
 from sklearn import linear_model
+from sklearn.decomposition import PCA
 
 variable_names = ['Diag', 'Radius Mean', 'Texture Mean', 'Perimeter Mean', 'Area Mean', 'Smoothness Mean', 'Compactness Mean', 'Concavity Mean', 'Concave Points Mean',    'Symmetry Mean', 'Fractal Dimension Mean',	'Radius SE', 'Texture SE', 'Perimeter SE', 'Area SE', 'Smoothness SE', 'Compactness SE', 'Concavity SE',     'Concave points SE', 'Symmetry SE', 'Fractal Dimension SE',	'Radius Worst',	'Texture Worst', 'Perimeter Worst', 'Area Worst', 'Smoothness Worst',     'Compactness Worst',	'Concavity Worst', 'Concave Points Worst',	'Symmetry Worst', 'Fractal Dimension Worst']
 
@@ -150,7 +151,6 @@ def classifierStats(y, y_pred):
 	print "FN = ", fn
 	print "VN = ", vn 
 	print "mislabeled :", mislabeled
-	print "ACC = ", (vp+vn)/(vp+fp+fn+vn) 
 	return [vp, fp, fn, vn]
 
 def bayesianClassifier(data_train, data_test, target_train, target_test):
@@ -210,7 +210,8 @@ def plotPREREC(confmat, name):
 	rec_c1 = vp/(vp+fn)
 	rec_c2 = vn/(vn+fp)
 	print pre_c1, rec_c1, pre_c2, rec_c2
-	print 'AUC = ' (rec_c1+rec_c2)/2 
+	print 'AUC = ', (rec_c1+rec_c2)/2 
+	print "ACC = ", (vp+vn)/(vp+fp+fn+vn) 
 	p1 = plt.bar(ind1, [pre_c1,rec_c1], width, color='r')
 	p2 = plt.bar(ind2, [pre_c2,rec_c2], width, color='b')
 	plt.ylabel('PRE/REC')
@@ -236,6 +237,7 @@ def main():
 	bayes_quad = []
 	percep = []
 	mlp = []
+	
 
 	for i in range(0,10):
 		data_train, data_test, target_train, target_test = kfoldSplit(data, target, 10, i)
