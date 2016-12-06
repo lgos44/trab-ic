@@ -81,6 +81,7 @@
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{caption}
+\usepackage{amsmath}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -155,7 +156,7 @@ Inteligência Computacional \\ % Your institution for the title page
 \frametitle{Matriz de Correlação}
 \begin{figure}[H]
     \centering
-    %\includegraphics[width=0.8\textwidth]{../corrcoef.png}
+    \includegraphics[width=0.8\textwidth]{../img/corrcoef.png}
     \label{fig:corrcoef}
 \end{figure}
 \end{frame}
@@ -166,7 +167,7 @@ Inteligência Computacional \\ % Your institution for the title page
 \frametitle{Distância Euclidiana}
 \begin{figure}[H]
     \centering
-    %\includegraphics[width=0.8\textwidth]{../dist.png}
+    \includegraphics[width=0.8\textwidth]{../img/distance_zscore_clean.png}
     \label{fig:corrcoef}
 \end{figure}
 \end{frame}
@@ -259,7 +260,7 @@ Para cada método de classificação foi feito:
 \begin{itemize}
 \item Validação cruzada de 10 ciclos
 \item Matriz de confusão (média de cada ciclo)
-\item Métricas de acurácia, precisão, recuperão. 
+\item Métricas de acurácia, precisão, recuperação. 
 \end{itemize}
 \end{frame}
 
@@ -268,7 +269,7 @@ Para cada método de classificação foi feito:
 \frametitle{Classificador Bayesiano Simples (Naive Bayes)}
 \begin{itemize} 
 \item Aplicação do teorema de Bayes
-\item Supoe que cada par de variáveis é independente
+\item Supõe que cada par de variáveis é independente
 \end{itemize}
 
 \begin{theorem}[Teorema de Bayes]
@@ -328,7 +329,7 @@ $C_2$ &  1.20&34.50\\
 \end{itemize}
 
 \begin{theorem}[Função Discriminante]
-\[ g_i(x(t))= ln P(C_i|x(t))= ln p(x(t)|C_i)+ ln P(C_i)\]
+\[ g_i(x(t))= ln P(C_i|x(t))= ln P(x(t)|C_i)+ ln P(C_i)\]
 
 \end{theorem}
 
@@ -442,11 +443,10 @@ $u(t)$: valor de ativação
 $z(t)$: potencial de ativaçãos
 
 $h$: função de ativação
-
+  
 $x_i(t)$: entradas do neurônio
 \end{block}
 \end{frame}
-
 
 \begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
 \frametitle{Perceptron - Implementação}
@@ -460,6 +460,22 @@ class sklearn.linear_model.Perceptron(penalty=None,
 \end{block}
 É uma expecialização do \verb|sklearn.linear_model.SGDClassifier|.
 \end{frame}
+
+\begin{frame}
+\frametitle{Perceptron}
+\begin{itemize}
+\item Função custo: linear
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.8\linewidth]{../img/loss_function.png}
+  \label{fig:percep}
+\end{figure}%
+
+
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Perceptron - Resultados}
@@ -498,7 +514,50 @@ $C_2$ & 1.40&34.30\\
 \begin{frame}
 \frametitle{Perceptron de Múltiplas Camadas}
 \begin{itemize}
-  \item asdxf
+  \item Camada de entrada que não realiza processamento (dimensão do vetor de entrada)
+  \item Camada de saída: vetor com as estimativas das variáveis indicadoras (dimensão vetor de saída)
+\end{itemize}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.43\linewidth]{../img/multilayerperceptron_network.png}
+  \label{fig:percep}
+\end{figure}%
+\end{frame}
+
+\begin{frame}
+\frametitle{Perceptron de Múltiplas Camadas}
+\begin{itemize}
+\item A função custo a ser utilizada é a Entropia cruzada, ou função verossimilhança:
+\begin{block}{Entropia Cruzada}
+\[ l(\theta) = -\sum_{t=1}^N \nu(t)log(\hat{\nu}) + (1-\nu(t)) log(1-\hat{\nu}(t)) \]
+\end{block}
+\item A função de ativação nos neurônios das camadas intermediárias é:
+\begin{block}{Tangente hiperbólica}
+\[ u(t) = \frac{1- exp(-z(t))}{1+exp(-z(t))}\]
+\end{block}
+\item Método de ajuste dos parâmetros: Gradiente descendente estocástico
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Perceptron de Múltiplas Camadas - Observações}
+\begin{itemize}
+  \item Capaz de aprender modelos não lineares
+  \item Quando existem camadas escondidas, a função custo é não convexa 
+  \item Mais de um mínimo local
+  \item Diferentes resultados a cada inicialização
+  \item Sensível a escala das variáveis de entrada
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Perceptron de Múltiplas Camadas - Observações}
+\textbf{Padronização das variáveis de entrada}
+\begin{itemize}
+\item MLP apresenta desempenho ruim sem padronização
+\item Média zero e desvio padrão 1
+\item A padronização é calculada para o conjunto de treinamento e as mesma transformação é aplicada para o conjunto de teste.
 \end{itemize}
 \end{frame}
 
