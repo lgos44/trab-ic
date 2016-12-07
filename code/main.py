@@ -11,6 +11,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neural_network import MLPClassifier
 from sklearn import linear_model
+from sklearn import svm
 from sklearn.decomposition import PCA
 
 variable_names = ['Diag', 'Radius Mean', 'Texture Mean', 'Perimeter Mean', 'Area Mean', 'Smoothness Mean', 'Compactness Mean', 'Concavity Mean', 'Concave Points Mean',    'Symmetry Mean', 'Fractal Dimension Mean',	'Radius SE', 'Texture SE', 'Perimeter SE', 'Area SE', 'Smoothness SE', 'Compactness SE', 'Concavity SE',     'Concave points SE', 'Symmetry SE', 'Fractal Dimension SE',	'Radius Worst',	'Texture Worst', 'Perimeter Worst', 'Area Worst', 'Smoothness Worst',     'Compactness Worst',	'Concavity Worst', 'Concave Points Worst',	'Symmetry Worst', 'Fractal Dimension Worst']
@@ -182,6 +183,12 @@ def multiLayerPerceptron(data_train, data_test, target_train, target_test):
 	y_pred = clf.predict(data_test)
 	return classifierStats(target_test,y_pred)
 
+def svmLinearKernel(data_train, data_test, target_train, target_test):
+	clf = svm.SVC(C=1)
+	clf.fit(data_train, target_train)  
+	y_pred = clf.predict(data_test)
+	return classifierStats(target_test, y_pred)
+
 ## Distance matrix and outlier removal
 def distanceMatOut():
 	#sort by class 1st column
@@ -237,7 +244,7 @@ def main():
 	bayes_quad = []
 	percep = []
 	mlp = []
-	
+	svm = []
 
 	for i in range(0,10):
 		data_train, data_test, target_train, target_test = kfoldSplit(data, target, 10, i)
@@ -263,6 +270,10 @@ def main():
 		print "MLP"
 		stats = multiLayerPerceptron(data_train, data_test, target_train, target_test)
 		mlp.append(stats)
+		print "SVM"
+		stats = svmLinearKernel(data_train, data_test, target_train, target_test)
+		print stats
+		svm.append(stats)
 		
 	
 	print "Bayesian Classifier"	
@@ -299,6 +310,13 @@ def main():
 	base_name = 'mlp'
 	plotPREREC(conf_mlp, '../img/'+ base_name + '_rec.png')
 	saveConfMat(conf_mlp, base_name + '_conf.csv')
+
+	print "SVM"
+	conf_svm = np.mean(np.transpose(np.array(svm)), axis=1)
+	print conf_svm
+	base_name = 'svm'	
+	plotPREREC(conf_svm, '../img/'+ base_name + '_rec.png')
+	saveConfMat(conf_svm, base_name + '_conf.csv')
 
 if __name__ == "__main__":
     main()
