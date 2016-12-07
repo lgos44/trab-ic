@@ -593,7 +593,7 @@ class sklearn.neural_network.MLPClassifier
  solver='adam', alpha=0.0001, batch_size='auto',
  learning_rate='constant', learning_rate_init=0.001,
  power_t=0.5, max_iter=200, shuffle=True, 
-random_state=None, tol=0.0001, verbose=False,
+ random_state=None, tol=0.0001, verbose=False,
  warm_start=False, momentum=0.9, nesterovs_momentum=True,
  early_stopping=False, validation_fraction=0.1,
  beta_1=0.9, beta_2=0.999, epsilon=1e-08)
@@ -708,6 +708,24 @@ $C_2$ & 0.30  & 35.40\\
 \end{figure}%
 
 \end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Máquina de Vetor de Suporte}
+\begin{itemize}
+\item Mais recomendado para vetores características de dimensões maiores
+\item Função de núcleo utilizada: RBF
+\begin{block}{Problema de ajuste de parametros}
+\begin{align*}
+\min_ {w, b, \zeta} \frac{1}{2} w^T w + C \sum_{i=1}^{n} \zeta_i \\
+\textrm {sujeito a } & y_i (w^T \phi (x_i) + b) \geq 1 - \zeta_i,\\
+& \zeta_i \geq 0, i=1, ..., n
+\end{align*}
+$C = \frac{N}{\alpha}$
+
+$w:$ direção ortogonal ao hiperplano da função discriminante
+\end{block}
+\end{itemize}
 \end{frame}
 
 
