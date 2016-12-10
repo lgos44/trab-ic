@@ -14,7 +14,7 @@ from sklearn import linear_model
 from sklearn import svm
 from sklearn.decomposition import PCA
 
-variable_names = ['Diag', 'Radius Mean', 'Texture Mean', 'Perimeter Mean', 'Area Mean', 'Smoothness Mean', 'Compactness Mean', 'Concavity Mean', 'Concave Points Mean',    'Symmetry Mean', 'Fractal Dimension Mean',	'Radius SE', 'Texture SE', 'Perimeter SE', 'Area SE', 'Smoothness SE', 'Compactness SE', 'Concavity SE',     'Concave points SE', 'Symmetry SE', 'Fractal Dimension SE',	'Radius Worst',	'Texture Worst', 'Perimeter Worst', 'Area Worst', 'Smoothness Worst',     'Compactness Worst',	'Concavity Worst', 'Concave Points Worst',	'Symmetry Worst', 'Fractal Dimension Worst']
+variable_names = ['Radius Mean', 'Texture Mean', 'Perimeter Mean', 'Area Mean', 'Smoothness Mean', 'Compactness Mean', 'Concavity Mean', 'Concave Points Mean',    'Symmetry Mean', 'Fractal Dimension Mean',	'Radius SE', 'Texture SE', 'Perimeter SE', 'Area SE', 'Smoothness SE', 'Compactness SE', 'Concavity SE',     'Concave points SE', 'Symmetry SE', 'Fractal Dimension SE',	'Radius Worst',	'Texture Worst', 'Perimeter Worst', 'Area Worst', 'Smoothness Worst',     'Compactness Worst',	'Concavity Worst', 'Concave Points Worst',	'Symmetry Worst', 'Fractal Dimension Worst']
 
 # Loads csv discarting the first line (variable names) 
 def loadCsv(filename):
@@ -80,12 +80,19 @@ def statistics(data, individual=None):
 	#print np.transpose(np.array(stats))[inds]
 
 def correlationCoeffMatrix(filename):
-	dataset = loadCsv(filename)
+	dataset, t = loadCsv(filename)
 	dataset_np = np.array(dataset)
 	dataset_np_transp = np.transpose(dataset_np)
 	correlation_matrix = np.corrcoef(dataset_np_transp)
+	temp = []
+	for i in range(0, 30):
+		for j in range(0, 30):
+			if correlation_matrix[i][j] < 0. and i!=j:
+				if (j,i) not in temp:
+					temp.append((i,j))
+					print '\item ' + variable_names[i]+', ' + variable_names[j]
 	v = np.linspace(-1.0, 1.0, 20, endpoint=True)
-	plt.imshow(cm,interpolation='nearest', vmin=-1, vmax=1)
+	plt.imshow(correlation_matrix,interpolation='nearest', vmin=-1, vmax=1)
 	plt.colorbar()
 	plt.show()
 

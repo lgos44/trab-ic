@@ -69,7 +69,7 @@ Inicialmente é importante ressaltar que o conjunto de dados gerado pelos exames
 De forma a eliminar a terceira dimensão (do conjunto de células), para cada conjunto de células o \textit{UCI Machine Learning} forneceu o dataset com valores de média, desvio(erro) padrão e o pior valor dos atributos no universo das células, resultando em 30 variáveis de entrada. O dataset conforme obtido possui as variáveis como segue:
 
 \begin{multicols}{3}
-\begin{itemize}
+\begin{enumerate}
     \item radius\_mean	
     \item texture\_mean
     \item perimeter\_mean
@@ -100,7 +100,7 @@ De forma a eliminar a terceira dimensão (do conjunto de células), para cada co
     \item concave points\_worst
     \item symmetry\_worst
     \item fractal\_dimension\_worst
-\end{itemize}
+\end{enumerate}
 \end{multicols}
 
 A variável de saída é o diagnóstico (maligno ou benigno codificados como $-1$ e $1$ respectivamente). Existe uma coluna com o ID do paciente que será eliminada ser irrelevante. O dataset apresenta 357 amostras benignas e 212 amostras malignas. 
@@ -112,22 +112,22 @@ A variável de saída é o diagnóstico (maligno ou benigno codificados como $-1
 \item Radius
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.4\linewidth]{./img/radius_mean}
+  \includegraphics[width=.5\linewidth]{../img/hist/radius_mean}
   \captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/radius_se}
+  \includegraphics[width=\linewidth]{../img/hist/radius_se}
   \captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/radius_worst}
+  \includegraphics[width=\linewidth]{../img/hist/radius_worst}
   \captionof{figure}{Worst}
   \label{fig:test2}
 \end{minipage}
@@ -160,22 +160,22 @@ Já para a variável Radius Worst, tem um comportamento semelhante à variável 
 \item Texture
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.4\linewidth]{./img/texture_mean}
+  \includegraphics[width=.5\linewidth]{../img/hist/texture_mean}
   \captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/texture_se}
+  \includegraphics[width=\linewidth]{../img/hist//texture_se}
   \captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/texture_worst}
+  \includegraphics[width=\linewidth]{../img/hist/texture_worst}
   \captionof{figure}{Worst}
   \label{fig:test2}
 \end{minipage}
@@ -204,22 +204,22 @@ Análise: Podemos perceber que a variável Texture Mean, tem um comportamento qu
 \item Perimeter
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.4\linewidth]{./img/perimeter_mean}
+  \includegraphics[width=.5\linewidth]{../img/hist/perimeter_mean}
   \captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/perimeter_se}
+  \includegraphics[width=\linewidth]{../img/hist/perimeter_se}
   \captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/perimeter_worst}
+  \includegraphics[width=\linewidth]{../img/hist/perimeter_worst}
   \captionof{figure}{Worst}
   \label{fig:test2}
 \end{minipage}
@@ -248,22 +248,22 @@ Análise: Em Perimeter Standard Error, vemos a presença de outliers, como por e
 \item Area
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.4\linewidth]{./img/area_mean}
+  \includegraphics[width=.5\linewidth]{../img/hist/area_mean}
   \captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/area_se}
+  \includegraphics[width=\linewidth]{../img/hist/area_se}
   \captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/area_worst}
+  \includegraphics[width=\linewidth]{../img/hist/area_worst}
   \captionof{figure}{Worst}
   \label{fig:test2}
 \end{minipage}
@@ -291,22 +291,22 @@ Análise: Na variável Area Mean, vemos que ela possui um desvio padrão grande,
 \item Smoothness
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.4\linewidth]{./img/smoothness_mean}
+  \includegraphics[width=.5\linewidth]{../img/hist/smoothness_mean}
   \captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/smoothness_se}
+  \includegraphics[width=\linewidth]{../img/hist/smoothness_se}
   \captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/smoothness_worst}
+  \includegraphics[width=\linewidth]{../img/hist/smoothness_worst}
   \captionof{figure}{Worst}
   \label{fig:test2}
 \end{minipage}
@@ -334,7 +334,7 @@ Análise: Podemos ver que tanto Smoothness Mean quanto em Worst, elas tem uma ap
 \item Compactness
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.4\linewidth]{./img/compactness_mean}
+  \includegraphics[width=.5\linewidth]{../img/hist/compactness_mean}
   \captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
@@ -342,15 +342,15 @@ Análise: Podemos ver que tanto Smoothness Mean quanto em Worst, elas tem uma ap
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/compactness_se}
+  \includegraphics[width=\linewidth]{../img/hist/compactness_se}
   \captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/compactness_worst}
+  \includegraphics[width=\linewidth]{../img/hist/compactness_worst}
   \captionof{figure}{Worst}
   \label{fig:test2}
 \end{minipage}
@@ -377,7 +377,7 @@ Análise: Aqui percebemos que as 3 variáveis possuem um desvio padrão alto e s
 \item Concavity
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.4\linewidth]{./img/concavity_mean}
+  \includegraphics[width=.5\linewidth]{../img/hist/concavity_mean}
   \captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
@@ -385,15 +385,15 @@ Análise: Aqui percebemos que as 3 variáveis possuem um desvio padrão alto e s
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/concavity_se}
+  \includegraphics[width=\linewidth]{../img/hist/concavity_se}
   \captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/concavity_worst}
+  \includegraphics[width=\linewidth]{../img/hist/concavity_worst}
   \captionof{figure}{Worst}
   \label{fig:test2}
 \end{minipage}
@@ -420,22 +420,22 @@ Análise: Nas 3 variáveis percebemos que o seus valores se concentram mais prox
 \item Concave points
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.4\linewidth]{./img/concave_points_mean}
+  \includegraphics[width=.5\linewidth]{../img/hist/concave_points_mean}
   \captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/concave_points_se}
+  \includegraphics[width=\linewidth]{../img/hist/concave_points_se}
   \captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/concave_points_worst}
+  \includegraphics[width=\linewidth]{../img/hist/concave_points_worst}
   \captionof{figure}{Worst}
   \label{fig:test2}
 \end{minipage}
@@ -462,22 +462,22 @@ Análise: Aqui vemos que a variável Cancave points mean, tem um comportamento s
 \item Symmetry
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.4\linewidth]{./img/symmetry_mean}
+  \includegraphics[width=.5\linewidth]{../img/hist/symmetry_mean}
   \captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/symmetry_se}
+  \includegraphics[width=\linewidth]{../img/hist/symmetry_se}
   \captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/symmetry_worst}
+  \includegraphics[width=\linewidth]{../img/hist/symmetry_worst}
   \captionof{figure}{Worst}
   \label{fig:test2}
 \end{minipage}
@@ -505,22 +505,22 @@ Análise - A variável Symmetry mean possui um comportamento semelhante  a uma f
 \item Fractal Dimension
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.4\linewidth]{./img/fractal_dimension_mean}
+  \includegraphics[width=.5\linewidth]{../img/hist/fractal_dimension_mean}
   \captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/fractal_dimension_se}
+  \includegraphics[width=\linewidth]{../img/hist/fractal_dimension_se}
   \captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.4\textwidth}
+\begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/fractal_dimension_worst}
+  \includegraphics[width=\linewidth]{../img/hist/fractal_dimension_worst}
   \captionof{figure}{Worst}
   \label{fig:test2}
 \end{minipage}
@@ -556,6 +556,8 @@ A partir dos histogramas podemos avaliar que em geral não revelou característi
 \end{figure}%
 
 A partir da matriz podemos concluir que as seguintes variáveis estão fortemente correlacionadas (apresentam coeficiente de correlação acima de 0.9):
+
+\begin{multicols}{2}
 \begin{itemize}
 	 \item Radius Mean, Perimeter Mean
 	 \item Radius Mean, Area Mean
@@ -578,89 +580,65 @@ A partir da matriz podemos concluir que as seguintes variáveis estão fortement
  	 \item Radius Worst, Perimeter Worst
 	 \item Radius Worst, Area Worst
 	 \item Perimeter Worst, Area Worst
-    %\item Texture Mean, Area Mean
-    %\item Texture Mean, Smoothness Mean
-    %\item Texture Mean, Texture Worst
-    %\item Texture Mean, Area Worst
-    %\item Texture Mean, Smoothness Worst
-    %\item Perimeter Mean, Perimeter Worst
-    %\item Area Mean, Smoothness Mean
-    %\item Area Mean, Texture Worst
-    %\item Area Mean, Area Worst
-    %\item Area Mean, Smoothness Worst
-    %\item Smoothness Mean, Texture Worst
-    %\item Smoothness Mean, Area Worst
-    %\item Smoothness Mean, Smoothness Worst
-    %\item Concave Points Mean, Symmetry Mean
-    %\item Symmetry Mean, Symmetry Worst
-    %\item Texture SE, Area SE
-    %\item Texture SE, Smoothness SE
-    %\item Area SE, Smoothness SE
-    %\item Texture Worst, Area Worst
-    %\item Texture Worst, Smoothness Worst
 \end{itemize}
-
+\end{multicols}
 As seguintes variáveis apresentaram correlação negativa:
 
-\begin{table}[H]
-\centering
-\begin{tabular}{c|c}
-\hline
-Variável A                & Variável B             \\
-\hline
-compactness\_mean         & perimeter\_mean        \\
-radius\_se                & radius\_mean           \\
-radius\_se                & texture\_mean          \\
-radius\_se                & perimeter\_mean        \\
-radius\_se                & area\_mean             \\
-radius\_se                & smoothness\_mean       \\
-perimeter\_se             & radius\_mean           \\
-perimeter\_se             & texture\_mean          \\
-perimeter\_se             & area\_mean             \\
-perimeter\_se             & smoothness\_mean       \\
-compactness\_se           & radius\_mean           \\
-compactness\_se           & texture\_mean          \\
-compactness\_se           & perimeter\_mean        \\
-compactness\_se           & area\_mean             \\
-compactness\_se           & smoothness\_mean       \\
-fractal\_dimension\_se    & radius\_mean           \\
-fractal\_dimension\_se    & texture\_mean          \\
-fractal\_dimension\_se    & perimeter\_mean        \\
-fractal\_dimension\_se    & area\_mean             \\
-fractal\_dimension\_se    & smoothness\_mean       \\
-radius\_worst             & radius\_mean           \\
-radius\_worst             & texture\_mean          \\
-radius\_worst             & perimeter\_mean        \\
-radius\_worst             & area\_mean             \\
-radius\_worst             & smoothness\_mean       \\
-texture\_worst            & radius\_se             \\
-texture\_worst            & perimeter\_se          \\
-texture\_worst            & compactness\_se        \\
-texture\_worst            & fractal\_dimension\_se \\
-perimeter\_worst          & radius\_se             \\
-perimeter\_worst          & compactness\_se        \\
-perimeter\_worst          & fractal\_dimension\_se \\
-area\_worst               & radius\_se             \\
-area\_worst               & compactness\_se        \\
-area\_worst               & perimeter\_se          \\
-area\_worst               & fractal\_dimension\_se \\
-smoothness\_worst         & radius\_se             \\
-smoothness\_worst         & compactness\_se        \\
-smoothness\_worst         & perimeter\_se          \\
-smoothness\_worst         & fractal\_dimension\_se \\
-compactness\_worst        & fractal\_dimension\_se \\
-compactness\_worst        & perimeter\_se          \\
-concavity\_worst          & perimeter\_se          \\
-concavity\_worst          & compactness\_se        \\
-concave points\_worst     & perimeter\_se          \\
-concave points\_worst     & compactness\_se        \\
-symmetry\_worst           & perimeter\_se          \\
-symmetry\_worst           & compactness\_se        \\
-symmetry\_worst           & fractal\_dimension\_se \\
-fractal\_dimension\_worst & perimeter\_se          \\
-fractal\_dimension\_worst & compactness\_se       
-\end{tabular}
-\end{table}
+\begin{multicols}{2}
+\begin{itemize}
+\item Radius Mean, Fractal Dimension Mean
+\item Radius Mean, Texture SE
+\item Radius Mean, Smoothness SE
+\item Radius Mean, Symmetry SE
+\item Radius Mean, Fractal Dimension SE
+\item Texture Mean, Smoothness Mean
+\item Texture Mean, Fractal Dimension Mean
+\item Perimeter Mean, Fractal Dimension Mean
+\item Perimeter Mean, Texture SE
+\item Perimeter Mean, Smoothness SE
+\item Perimeter Mean, Symmetry SE
+\item Perimeter Mean, Fractal Dimension SE
+\item Area Mean, Fractal Dimension Mean
+\item Area Mean, Texture SE
+\item Area Mean, Smoothness SE
+\item Area Mean, Symmetry SE
+\item Area Mean, Fractal Dimension SE
+\item Fractal Dimension Mean, Area SE
+\item Fractal Dimension Mean, Radius Worst
+\item Fractal Dimension Mean, Texture Worst
+\item Fractal Dimension Mean, Perimeter Worst
+\item Fractal Dimension Mean, Area Worst
+\item Texture SE, Radius Worst
+\item Texture SE, Perimeter Worst
+\item Texture SE, Area Worst
+\item Texture SE, Smoothness Worst
+\item Texture SE, Compactness Worst
+\item Texture SE, Concavity Worst
+\item Texture SE, Concave Points Worst
+\item Texture SE, Symmetry Worst
+\item Texture SE, Fractal Dimension Worst
+\item Smoothness SE, Radius Worst
+\item Smoothness SE, Texture Worst
+\item Smoothness SE, Perimeter Worst
+\item Smoothness SE, Area Worst
+\item Smoothness SE, Compactness Worst
+\item Smoothness SE, Concavity Worst
+\item Smoothness SE, Concave Points Worst
+\item Smoothness SE, Symmetry Worst
+\item Symmetry SE, Radius Worst
+\item Symmetry SE, Texture Worst
+\item Symmetry SE, Perimeter Worst
+\item Symmetry SE, Area Worst
+\item Symmetry SE, Smoothness Worst
+\item Symmetry SE, Concave Points Worst
+\item Fractal Dimension SE, Radius Worst
+\item Fractal Dimension SE, Texture Worst
+\item Fractal Dimension SE, Perimeter Worst
+\item Fractal Dimension SE, Area Worst
+
+\end{itemize}
+\end{multicols}
+
 \subsection{Matriz de Distâncias} 
 
 As figuras \ref{fig:distorig} e \ref{fig:zscore} mostram a matriz de distâncias, utilizando a Distância Euclidiana:
@@ -716,10 +694,14 @@ Para solução deste problema serão aplicados os modelos de classificação a s
 \item Classificador Bayesiano Simples
 \item Classificador Bayesiano Quadrático
 \item Regressão Logística
+\item Perceptron
 \item Perceptron Múltiplas Camadas
+\item SVM
 \end{itemize}
 
-Para os testes a seguinte metodologia será usada. O dataset é dividido em uma razão de $67\%$ dos dados para treinamento e $33\%$ dos dados para teste. Para avaliar o desempenho do classificador, os resultados preditos pelo teste é comparado com os resultados reais e contabilizada a matriz de confusão. A partir dela são calculados as seguintes métricas:
+Para os testes será utilizada a metodologia de validação cruzada de 10 ciclos. A cada iteração o dataset é dividido em subconjuntos complementares. O modelo é ajustado com o conjunto de treinamento e aplicado para predizer a saída do conjunto de teste. O resultado final é obtido como a média de cada iteração. 
+
+Para avaliar o desempenho do classificador, os resultados preditos pelo teste são comparado com os resultados reais e contabilizada a matriz de confusão. A partir dela são calculados as seguintes métricas:
 \begin{itemize}
 \item Acurácia
 \item Erro global
@@ -728,9 +710,8 @@ Para os testes a seguinte metodologia será usada. O dataset é dividido em uma 
 \end{itemize}
 
 \section{Apresentação da Tecnologia}
-Para a implementação e execução dos algoritmos serão usadas as seguintes ferramentas, conforme se mostrarem mais adequadas para a tarefa em questão.
+Para a implementação e execução dos algoritmos serão usadas as seguintes ferramentas:
 
-\subsection{Python}
 A linguagem Python apresenta diversas bibliotecas úteis como:
 \begin{itemize}
 \item \textit{SciPy}: Ecossistema de softwares para matemática, ciência e engenharia. Contém os pacotes:
@@ -742,19 +723,148 @@ A linguagem Python apresenta diversas bibliotecas úteis como:
 \item \textit{scikit-learn}: Machine Learning in Python
 \end{itemize}
 
-\subsection{Matlab}
-Possui o seguinte \textit{Toolbox}
-\begin{itemize}
-\item Statistics and Machine Learning Toolbox
-\end{itemize}
 
 \section{Classificador Bayesiano Simples}
 
+\subsection{Formulação matemática}
 O Classificador Bayesiano baseia-se na aplicação do Teorema de Bayes com a suposição de independência entre cada par de variáveis. 
 
+\[P(y|x_1 \dots x_n)  = \frac{P(y)P(x_1, \dots, x_n|y)}{P(x_1,\dots, x_n)}\]
+Onde:
+
+$y$ é a variável de saída que identifica a classe
+
+$x = [x_1, \dots, x_n] $ é o vetor de entrada 
+
+\subsection{Resultados}
+O dataset não é linearmente separável portanto os resultados não foram tão satisfatórios.
+
+\begin{table}[H]
+\centering
+\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\hline
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\hline
+$C_1$ & 18.80&2.40\\ 
+$C_2$ &  1.20&34.50\\ 
+\hline
+\end{tabular}
+\end{table}
+
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+\item $ACC = 93.67 \%$
+\item $ERR =  $
+\item $AUC = 0.9266 $
+\item $PRE(C1) = 0.94$
+\item $REC(C1) = 0.8868$
+\item $PRE(C2) = 0.9350$
+\item $REC(C2) = 0.9664$
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/naive_bayes_rec.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}
+\end{minipage}%
+
+
 \section{Classificador Bayesiano Quadrático}
+\subsection{Formulação Matemática}
+É um classificador com uma fronteira de decisão quadrática, gerado pela densidades condicionais dos dados e utilizando a regra de Bayes.
+
+A decisão é calculada pela função discriminante:
+\[ g_i(x(t))= ln P(C_i|x(t))= ln P(x(t)|C_i)+ ln P(C_i)\]
+
+\subsection{Resultados}
+
+\begin{table}[H]
+\centering
+\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\hline
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\hline
+$C_1$ & 20.00&1.20\\ 
+$C_2$ &  1.20&34.50\\ 
+\hline
+\end{tabular}
+\end{table}
+
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+\item $ACC = 95.78 \%$
+\item $AUC = 0.9549 $
+\item $ERR =  $
+\item $PRE(C1) = 0.9434$
+\item $REC(C1) = 0.9434$
+\item $PRE(C2) = 0.9664$
+\item $REC(C2) = 0.9664$
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/quad_bayes_rec.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}
+\end{minipage}%
+
+
 \section{Regressão Logística}
+
+\subsection{Formulação Matemática}
+Na regressão logística, a saída do modelo é uma aproximação da probabilidade a posteriori.
+
+A função discriminante é calculada pela função sigmoide, ou função logística ou logit:
+
+\[g_i(x(t)|\theta_i))  = \frac{1}{1+ exp(\hat{x}(t)\theta_i)}\]
+Onde:
+\[\hat{x}(t) = [1,x(t)] \quad e \quad \theta_i=[\theta\textsubscript{i0},\theta\textsubscript{i1}]^T\]
+
+\subsection{Resultados}
+
+\begin{table}[H]
+\centering
+\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\hline
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\hline
+$C_1$ & 20.00&1.20\\ 
+$C_2$ & 1.10&34.60\\  
+\hline
+\end{tabular}
+\end{table}
+
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+\item $ACC = 95.96 \%$
+\item $ERR =  $
+\item $AUC = 0.9563 $
+\item $PRE(C1) = 0.9479$
+\item $REC(C1) = 0.9434$
+\item $PRE(C2) = 0.9665$
+\item $REC(C2) = 0.9692$
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/log_reg_rec.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}
+\end{minipage}%
+
+
 \section{Perceptron}
+\subsection{Formulação Matemática}
 O Perceptron utiliza o modelo McCulloch-Pitts para o neurônio artificial. O processamento de cada unidade é dado por:
 \[ u(t) = h(z(t)) = h \left( \theta_0 + \sum_{i=1}^n x_i(t) \theta_i \right) \]
 onde:
@@ -767,51 +877,285 @@ $h$: função de ativação
 
 $x_i(t)$: entradas do neurônio
 
-O Perceptron incorpora o conceito de aprendizado, ou seja, se o padrão é classificado corretamente nenhum ajuste é realizado.
-\section{Perceptron de Múltiplas Camadas (MLP)}
-Uma rede-neural MLP apresenta uma camada de entrada que não realiza processamento, uma ou mais camadas intermediárias que realizam processamento e uma camada de saída que, num problema de classificação é o vetor com as estimativas das variáveis indicadoras. O modelo McCulloch-Pitts é utilizado nas unidades das camadas intermediárias e de saída.
+%O Perceptron incorpora o conceito de aprendizado, ou seja, se o padrão é classificado corretamente nenhum ajuste é realizado. TODO
 
+\subsection{Resultados}
 
-
-
-\begin{table}[]
+\begin{table}[H]
 \centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{lllllll}
-Máximo  & Mínimo   & Média    & Desvio Padrão & P 25 & P 50 & P 75 \\
-28.11   & 6.981    & 14.13    & 3.524         & 11.7         & 13.37        & 15.78        \\
-2.873   & 0.1115   & 0.4052   & 0.2773        & 0.2324       & 0.3242       & 0.4789       \\
-36.04   & 7.93     & 16.27    & 4.833         & 13.01        & 14.97        & 18.79        \\
-39.28   & 9.71     & 19.29    & 4.301         & 16.17        & 18.84        & 21.8         \\
-4.885   & 0.3602   & 1.217    & 0.5516        & 0.8339       & 1.108        & 1.474        \\
-49.54   & 12.02    & 25.68    & 6.146         & 21.08        & 25.41        & 29.72        \\
-188.5   & 43.79    & 91.97    & 24.3          & 75.17        & 86.24        & 104.1        \\
-21.98   & 0.757    & 2.866    & 2.022         & 1.606        & 2.287        & 3.357        \\
-251.2   & 50.41    & 107.3    & 33.6          & 84.11        & 97.66        & 125.4        \\
-2501    & 143.5    & 654.9    & 351.9         & 420.3        & 551.1        & 782.7        \\
-542.2   & 6.802    & 40.34    & 45.49         & 17.85        & 24.53        & 45.19        \\
-4254    & 185.2    & 880.6    & 569.4         & 515.3        & 686.5        & 1084         \\
-0.1634  & 0.05263  & 0.09636  & 0.01406       & 0.08637      & 0.09587      & 0.1053       \\
-0.03113 & 0.001713 & 0.007041 & 0.003003      & 0.005169     & 0.00638      & 0.008146     \\
-0.2226  & 0.07117  & 0.1324   & 0.02283       & 0.1166       & 0.1313       & 0.146        \\
-0.3454  & 0.01938  & 0.1043   & 0.05281       & 0.06492      & 0.09263      & 0.1304       \\
-0.1354  & 0.002252 & 0.02548  & 0.01791       & 0.01308      & 0.02045      & 0.03245      \\
-1.058   & 0.02729  & 0.2543   & 0.1573        & 0.1472       & 0.2119       & 0.3391       \\
-0.4268  & 0		   & 0.0888   & 0.07972       & 0.02956      & 0.06154      & 0.1307         \\
-0.396   & 0  	   & 0.03189  & 0.03019       & 0.01509      & 0.02589      & 0.04205      \\
-1.252   & 0        & 0.2722   & 0.2086        & 0.1145       & 0.2267       & 0.3829       \\
-0.2012  & 0        & 0.04892  & 0.0388        & 0.02031      & 0.0335       & 0.074        \\
-0.05279 & 0  	   & 0.0118   & 0.00617       & 0.007638     & 0.01093      & 0.01471      \\
-0.291   & 0		   & 0.1146   & 0.06573       & 0.06493      & 0.09993      & 0.1614       \\
-0.304   & 0.106    & 0.1812   & 0.02741       & 0.1619       & 0.1792       & 0.1957       \\
-0.07895 & 0.007882 & 0.02054  & 0.008266      & 0.01516      & 0.01873      & 0.02348      \\
-0.6638  & 0.1565   & 0.2901   & 0.06187       & 0.2504       & 0.2822       & 0.3179       \\
-0.09744 & 0.04996  & 0.0628   & 0.00706       & 0.0577       & 0.06154      & 0.06612      \\
-0.02984 & 0.000895 & 0.003795 & 0.002646      & 0.002248     & 0.003187     & 0.004558     \\
-0.2075  & 0.05504  & 0.08395  & 0.01806       & 0.07146      & 0.08004      & 0.09208     
+\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\hline
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\hline
+$C_1$ & 20.40&0.80\\ 
+$C_2$ & 1.40&34.30\\ 
+\hline
 \end{tabular}
 \end{table}
 
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+\item $ACC = 96.13 \%$
+\item $ERR =  $
+\item $AUC = 0.9615 $
+\item $PRE(C1) = 0.9358$
+\item $REC(C1) = 0.9623$
+\item $PRE(C2) = 0.9772$
+\item $REC(C2) = 0.9608$
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/perc_rec.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}
+\end{minipage}%
+
+\section{Perceptron de Múltiplas Camadas (MLP)}
+\subsection{Formulação Matemática}
+Uma rede-neural MLP apresenta uma camada de entrada que não realiza processamento com a dimensão do vetor de entrada, uma ou mais camadas intermediárias que realizam processamento e uma camada de saída que, num problema de classificação é o vetor com as estimativas das variáveis indicadoras. O modelo McCulloch-Pitts é utilizado nas unidades das camadas intermediárias e de saída.
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.43\linewidth]{../img/multilayerperceptron_network.png}
+  \label{fig:percep}
+  \captionof{figure}{Rede neural MLP}
+\end{figure}%
+
+A função custo a ser utilizada é a Entropia cruzada, ou função verossimilhança:
+\[ l(\theta) = -\sum_{t=1}^N \nu(t)log(\hat{\nu}) + (1-\nu(t)) log(1-\hat{\nu}(t)) \]
+
+A função de ativação escolhida para os neurônios das camadas intermediárias foi a Tangente hiperbólica:
+
+\[ u(t) = \frac{1- exp(-z(t))}{1+exp(-z(t))}\]
+
+ Método de ajuste dos parâmetros escolhido foi o Gradiente descendente estocástico. Aprendizado através do Backpropagation.
+
+O Perceptron de Múltiplas Camadas é capaz de aprender modelos não lineares.
+
+Durante a execução do algoritmo notou-se que os resultados eram diferentes a cada execução. Isso se deve a inicialização aleatória dos parametros. Quando existem camadas escondidas a função custo não é convexa, portanto existe mais de um mínimo local.
+
+Além disso, o método é bastante sensível a escala das variáveis de entrada, tornando necessária, mais que em outros métodos, a padronização das variáveis. Foi feita uma padronização de modo a obter média zero e desvio padrão 1. A padronização é calculada no conjunto de treinamento e a mesma transformação é aplicada para o conjunto de teste.
+\subsection{Resultados - (21)}
+
+\begin{table}[H]
+\centering
+\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\hline
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\hline
+$C_1$ & 20.20&1.00\\
+$C_2$ & 0.40&35.30\\ 
+\hline
+\end{tabular}
+\end{table}
+
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+\item $ACC = 97.35 \%$
+\item $ERR =  $
+\item $AUC = 0.9708 \%$
+\item $PRE(C1) = 0.9806$
+\item $REC(C1) = 0.9528$
+\item $PRE(C2) = 0.9725$
+\item $REC(C2) = 0.9888$
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/mlp_rec.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}
+\end{minipage}%
+
+\subsection{Resultados - (100)}
+
+\begin{table}[H]
+\centering
+\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\hline
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\hline
+$C_1$ & 20.40 & 0.80 \\
+$C_2$ & 0.30  & 35.40\\ 
+\hline
+\end{tabular}
+\end{table}
+
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+\item $ACC = 98.07 \%$
+\item $ERR =  $
+\item $AUC = 0.9769  $
+\item $PRE(C1) = 0.9855$
+\item $REC(C1) = 0.9623$
+\item $PRE(C2) = 0.9779$
+\item $REC(C2) = 0.9916$
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/mlp_100.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}
+\end{minipage}%
+
+\subsection{Resultados - (10,10)}
+\begin{table}[H]
+\centering
+\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\hline
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\hline
+$C_1$ & 20.30 & 0.90 \\
+$C_2$ & 0.30  & 35.40\\ 
+\hline
+\end{tabular}
+\end{table}
+
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+\item $ACC = 97.89 \%$
+\item $ERR =  $
+\item $AUC = 0.9746  $
+\item $PRE(C1) = 0.9854$
+\item $REC(C1) = 0.9575$
+\item $PRE(C2) = 0.9752$
+\item $REC(C2) = 0.9916$
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/mlp_10x10.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}
+\end{minipage}%
+
+
+\section{Máquinas de Vetor de Suporte (SVC)}
+\subsection{Formulação Matemática}
+O SVC é mais recomendado para vetores características de dimensões maiores.
+Função de núcleo utilizada: RBF.
+O problema de otimização para o ajuste de parâmetros pode ser escrito como:
+\begin{align*}
+\min_ {w, b, \zeta} \frac{1}{2} w^T w + C \sum_{i=1}^{n} \zeta_i \\
+\textrm {sujeito a } & y_i (w^T \phi (x_i) + b) \geq 1 - \zeta_i,\\
+& \zeta_i \geq 0, i=1, ..., n
+\end{align*}
+
+$C = \frac{N}{\alpha}$
+
+$w:$ direção ortogonal ao hiperplano da função discriminante
+
+
+O método busca maximizar a margem de separação.
+
+\subsection{Resultados}
+\begin{table}[H]
+\centering
+\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\hline
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\hline
+$C_1$ & 20.40 & 0.80 \\
+$C_2$ & 0.50  & 35.20\\ 
+\hline
+\end{tabular}
+\end{table}
+
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+\item $ACC = 97.72 \%$
+\item $ERR =  $
+\item $AUC = 0.9741  $
+\item $PRE(C1) = 0.9761$
+\item $REC(C1) = 0.9623$
+\item $PRE(C2) = 0.9778$
+\item $REC(C2) = 0.9860$
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/svm.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}
+\end{minipage}%
+
+\section{Conclusão}
+A comparação entre os métodos pode ser vista na tabela \ref{tab:results}.
+\begin{table}[H]
+\centering
+\caption{Resultados}
+\label{tab:results}
+\begin{tabular}{l l l} \hline
+ & \textbf{ACC} & \textbf{AUC}\\
+\hline
+Baysiano Simples & 0,9367 & 0,9266 \\ 
+Baysiano Quadrático & 0,9578 & 0,9549 \\ 
+Regressão Logistica & 0,9596 & 0,9563 \\ 
+Perceptron & 0,9613 & 0,9615 \\ 
+MPL (21) & 0,9735 & 0,9708 \\ 
+MPL(100) & \textbf{0,9807} & \textbf{0,9769} \\ 
+MPL(10,10) & 0,9789 & 0,9746 \\ 
+SVM & 0,9772 & 0,9741 \\ 
+\hline
+\end{tabular}
+\end{table}
+
+
+\section{Apêndice}
+\begin{table}[H]
+\centering
+\caption{Estatísticas básicas (todas as variáveis)}
+\label{my-label}
+\begin{tabular}{llllllll} \hline
+         & Máximo  & Mínimo   & Média    & Desvio Padrão & P 25         & P 50         & P 75         \\ \hline
+$x_{1}$  & 28.11   & 6.981    & 14.13    & 3.524         & 11.7         & 13.37        & 15.78        \\
+$x_{2}$  & 2.873   & 0.1115   & 0.4052   & 0.2773        & 0.2324       & 0.3242       & 0.4789       \\
+$x_{3}$  & 36.04   & 7.93     & 16.27    & 4.833         & 13.01        & 14.97        & 18.79        \\
+$x_{4}$  & 39.28   & 9.71     & 19.29    & 4.301         & 16.17        & 18.84        & 21.8         \\
+$x_{5}$  & 4.885   & 0.3602   & 1.217    & 0.5516        & 0.8339       & 1.108        & 1.474        \\
+$x_{6}$  & 49.54   & 12.02    & 25.68    & 6.146         & 21.08        & 25.41        & 29.72        \\
+$x_{7}$  & 188.5   & 43.79    & 91.97    & 24.3          & 75.17        & 86.24        & 104.1        \\
+$x_{8}$  & 21.98   & 0.757    & 2.866    & 2.022         & 1.606        & 2.287        & 3.357        \\
+$x_{9}$  & 251.2   & 50.41    & 107.3    & 33.6          & 84.11        & 97.66        & 125.4        \\
+$x_{10}$ & 2501    & 143.5    & 654.9    & 351.9         & 420.3        & 551.1        & 782.7        \\
+$x_{11}$ & 542.2   & 6.802    & 40.34    & 45.49         & 17.85        & 24.53        & 45.19        \\
+$x_{12}$ & 4254    & 185.2    & 880.6    & 569.4         & 515.3        & 686.5        & 1084         \\
+$x_{13}$ & 0.1634  & 0.05263  & 0.09636  & 0.01406       & 0.08637      & 0.09587      & 0.1053       \\
+$x_{14}$ & 0.03113 & 0.001713 & 0.007041 & 0.003003      & 0.005169     & 0.00638      & 0.008146     \\
+$x_{15}$ & 0.2226  & 0.07117  & 0.1324   & 0.02283       & 0.1166       & 0.1313       & 0.146        \\
+$x_{16}$ & 0.3454  & 0.01938  & 0.1043   & 0.05281       & 0.06492      & 0.09263      & 0.1304       \\
+$x_{17}$ & 0.1354  & 0.002252 & 0.02548  & 0.01791       & 0.01308      & 0.02045      & 0.03245      \\
+$x_{18}$ & 1.058   & 0.02729  & 0.2543   & 0.1573        & 0.1472       & 0.2119       & 0.3391       \\
+$x_{19}$ & 0.4268  & 0        & 0.0888   & 0.07972       & 0.02956      & 0.06154      & 0.1307       \\
+$x_{20}$ & 0.396   & 0        & 0.03189  & 0.03019       & 0.01509      & 0.02589      & 0.04205      \\
+$x_{21}$ & 1.252   & 0        & 0.2722   & 0.2086        & 0.1145       & 0.2267       & 0.3829       \\
+$x_{22}$ & 0.2012  & 0        & 0.04892  & 0.0388        & 0.02031      & 0.0335       & 0.074        \\
+$x_{23}$ & 0.05279 & 0        & 0.0118   & 0.00617       & 0.007638     & 0.01093      & 0.01471      \\
+$x_{24}$ & 0.291   & 0        & 0.1146   & 0.06573       & 0.06493      & 0.09993      & 0.1614       \\
+$x_{25}$ & 0.304   & 0.106    & 0.1812   & 0.02741       & 0.1619       & 0.1792       & 0.1957       \\
+$x_{26}$ & 0.07895 & 0.007882 & 0.02054  & 0.008266      & 0.01516      & 0.01873      & 0.02348      \\
+$x_{27}$ & 0.6638  & 0.1565   & 0.2901   & 0.06187       & 0.2504       & 0.2822       & 0.3179       \\
+$x_{28}$ & 0.09744 & 0.04996  & 0.0628   & 0.00706       & 0.0577       & 0.06154      & 0.06612      \\
+$x_{29}$ & 0.02984 & 0.000895 & 0.003795 & 0.002646      & 0.002248     & 0.003187     & 0.004558     \\
+$x_{30}$ & 0.2075  & 0.05504  & 0.08395  & 0.01806       & 0.07146      & 0.08004      & 0.09208      \\ \hline
+\end{tabular}
+\end{table}
 
 \end{document}
