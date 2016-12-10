@@ -190,7 +190,7 @@ def svmLinearKernel(data_train, data_test, target_train, target_test):
 	return classifierStats(target_test, y_pred)
 
 ## Distance matrix and outlier removal
-def distanceMatOut():
+def distanceMatOut(dataset_np, target_np):
 	#sort by class 1st column
 	inds = target_np.argsort()
 	target_np = target_np[inds[::1]]
@@ -227,7 +227,7 @@ def plotPREREC(confmat, name):
 	plt.legend((p1[0], p2[0]), ('C1', 'C2'))
 	#plt.xticks(ind + width/2.)
 	plt.xticks([0,(ind1[0]+ind1[1]+width)/2,(ind2[0]+ind2[1]+width)/2,6],('','C1','C2',''))
-	plt.show()
+	#plt.show()
 	#plt.savefig(name)
 
 def saveConfMat(confmat, name):
@@ -238,7 +238,7 @@ def main():
 	data, target = loadCsv('data2.csv')
 	#statistics(data)
 	
-	#dataset_clean, target_clean = distanceMatOut();
+	dataset_clean, target_clean = distanceMatOut(np.array(data), np.array(target));
 	bayes_simple = []
 	logreg = []
 	bayes_quad = []

@@ -87,13 +87,12 @@
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Short title]{Breast Cancer Wisconsin (Diagnostic)} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Breast Cancer Wisconsin]{Breast Cancer Wisconsin (Diagnostic)} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author{Luís Gustavo \\
-Aramys Almeida Matos
-} % Your name
+Aramys Almeida Matos} % Your name
 
-\institute[UFRJ] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+\institute[] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
 Inteligência Computacional \\ % Your institution for the title page
 \medskip
@@ -128,7 +127,8 @@ Inteligência Computacional \\ % Your institution for the title page
 \item Exames para câncer de mama.
 \item Características do núcleo de células computadas a partir de imagens digitalizadas
 \item 30 variáveis de entrada
-\item 1 variável de saída
+\item 1 variável de saída (maligno ou benigno)	
+\item 357 benigno e 212 maligno
 \item Raio, textura, perímetro, área, suavidade, compacidade, concavidade, pontos côncavos, simetria, dimensão fractal
 \end{itemize}
 \end{frame}
@@ -137,7 +137,7 @@ Inteligência Computacional \\ % Your institution for the title page
 \frametitle{Problema}
 \begin{itemize}
 \item Problema de classificação
-\item Identificar se o câncer é benigno ou maligno.
+\item Identificar se é benigno ou maligno (-1 ou 1).
 \item Aplicar e avaliar os modelos de classificação:
 \begin{itemize}
 \item Classificador Bayesiano Simples
@@ -153,15 +153,23 @@ Inteligência Computacional \\ % Your institution for the title page
 
 %------------------------------------------------
 
+%\begin{frame}
+%\frametitle{Matriz de Correlação}
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.8\textwidth]{../img/corrcoef_range.png}
+%    \label{fig:corrcoef}
+%\end{figure}
+%\end{frame}
+
 \begin{frame}
-\frametitle{Matriz de Correlação}
+\frametitle{Distância Euclidiana}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{../img/corrcoef.png}
+    \includegraphics[width=0.8\textwidth]{../img/dist_zscore_out.png}
     \label{fig:corrcoef}
 \end{figure}
 \end{frame}
-
 %------------------------------------------------
 
 \begin{frame}
@@ -172,7 +180,9 @@ Inteligência Computacional \\ % Your institution for the title page
     \label{fig:corrcoef}
 \end{figure}
 \end{frame}
+
 %------------------------------------------------
+
 
 \begin{frame}
 
@@ -180,20 +190,20 @@ Inteligência Computacional \\ % Your institution for the title page
 Smoothness
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.3\linewidth]{./Histogramas/Smoothness_Mean}
+  \includegraphics[width=.4\linewidth]{./Histogramas/Smoothness_Mean}
   %\captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.3\textwidth}
+\begin{minipage}{.4\textwidth}
   \centering
   \includegraphics[width=\linewidth]{./Histogramas/Smoothness_SE}
   %\captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.3\textwidth}
+\begin{minipage}{.4\textwidth}
   \centering
   \includegraphics[width=\linewidth]{./Histogramas/Smoothness_Worst}
   %\captionof{figure}{Worst}
@@ -208,20 +218,20 @@ Smoothness
 Texture
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.3\linewidth]{./Histogramas/Texture_Mean}
+  \includegraphics[width=.4\linewidth]{./Histogramas/Texture_Mean}
   %\captionof{figure}{Mean}
   \label{fig:test1}
 \end{figure}%
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{.3\textwidth}
+\begin{minipage}{.4\textwidth}
   \centering
   \includegraphics[width=\linewidth]{./Histogramas/Texture_SE}
   %\captionof{figure}{Standard Error}
   \label{fig:test1}
 \end{minipage}%
-\begin{minipage}{.3\textwidth}
+\begin{minipage}{.4\textwidth}
   \centering
   \includegraphics[width=\linewidth]{./Histogramas/Texture_Worst}
   %\captionof{figure}{Worst}
@@ -335,10 +345,10 @@ $C_2$ &  1.20&34.50\\
 \item A decisão é calculada pela função discriminante:
 \end{itemize}
 
-\begin{theorem}[Função Discriminante]
+\begin{block}{Função Discriminante}
 \[ g_i(x(t))= ln P(C_i|x(t))= ln P(x(t)|C_i)+ ln P(C_i)\]
 
-\end{theorem}
+\end{block}
 
 \end{frame}
 
@@ -395,12 +405,12 @@ probabilidade a posteriori.
 \item A função discriminante é calculada pela função sigmoide, ou função logística ou logit
 \end{itemize}
 
-\begin{theorem}[Função Logística]
+\begin{block}{Função Logística}
 \[g_i(x(t)|\theta_i))  = \frac{1}{1+ exp(\hat{x}(t)\theta_i)}\]
 Onde:
-\[\hat{x}(t) = [1,x(t)] e \theta_i=[\theta\textsubscript{i0},\theta\textsubscript{i1}]^T\]
+\[\hat{x}(t) = [1,x(t)] \quad e \quad \theta_i=[\theta\textsubscript{i0},\theta\textsubscript{i1}]^T\]
 
-\end{theorem}
+\end{block}
 
 \end{frame}
 
@@ -465,18 +475,18 @@ $x_i(t)$: entradas do neurônio
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-\frametitle{Perceptron - Implementação}
-\begin{block}{Scikit Learn}
-\begin{verbatim}
-class sklearn.linear_model.Perceptron(penalty=None, 
-  alpha=0.0001, fit_intercept=True, n_iter=5, 
-  shuffle=True, verbose=0, eta0=1.0, n_jobs=1, 
-  random_state=0, class_weight=None, warm_start=False)
-\end{verbatim}
-\end{block}
-É uma expecialização do \verb|sklearn.linear_model.SGDClassifier|.
-\end{frame}
+%\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
+%\frametitle{Perceptron - Implementação}
+%\begin{block}{Scikit Learn}
+%\begin{verbatim}
+%class sklearn.linear_model.Perceptron(penalty=None, 
+%  alpha=0.0001, fit_intercept=True, n_iter=5, 
+%  shuffle=True, verbose=0, eta0=1.0, n_jobs=1, 
+%  random_state=0, class_weight=None, warm_start=False)
+%\end{verbatim}
+%\end{block}
+%É uma expecialização do \verb|sklearn.linear_model.SGDClassifier|.
+%\end{frame}
 
 \begin{frame}
 \frametitle{Perceptron}
@@ -578,29 +588,29 @@ $C_2$ & 1.40&34.30\\
 \frametitle{Perceptron de Múltiplas Camadas - Observações}
 \textbf{Padronização das variáveis de entrada}
 \begin{itemize}
-\item MLP apresenta desempenho ruim sem padronização
+\item MLP apresenta baixo desempenho sem padronização
 \item Média zero e desvio padrão 1
 \item A padronização é calculada para o conjunto de treinamento e as mesma transformação é aplicada para o conjunto de teste.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-\frametitle{Perceptron de Múltiplas Camadas - Implementação}
-\begin{block}{Scikit Learn}
-\begin{verbatim}
-class sklearn.neural_network.MLPClassifier
-(hidden_layer_sizes=(100, ), activation='relu',
- solver='adam', alpha=0.0001, batch_size='auto',
- learning_rate='constant', learning_rate_init=0.001,
- power_t=0.5, max_iter=200, shuffle=True, 
- random_state=None, tol=0.0001, verbose=False,
- warm_start=False, momentum=0.9, nesterovs_momentum=True,
- early_stopping=False, validation_fraction=0.1,
- beta_1=0.9, beta_2=0.999, epsilon=1e-08)
-\end{verbatim}
-\end{block}
+%\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
+%\frametitle{Perceptron de Múltiplas Camadas - Implementação}
+%\begin{block}{Scikit Learn}
+%\begin{verbatim}
+%class sklearn.neural_network.MLPClassifier
+%(hidden_layer_sizes=(100, ), activation='relu',
+% solver='adam', alpha=0.0001, batch_size='auto',
+% learning_rate='constant', learning_rate_init=0.001,
+% power_t=0.5, max_iter=200, shuffle=True, 
+% random_state=None, tol=0.0001, verbose=False,
+% warm_start=False, momentum=0.9, nesterovs_momentum=True,
+% early_stopping=False, validation_fraction=0.1,
+% beta_1=0.9, beta_2=0.999, epsilon=1e-08)
+%\end{verbatim}
+%\end{block}
 
-\end{frame}
+%\end{frame}
 
 \begin{frame}
 \frametitle{Perceptron de Múltiplas Camadas - Resultados}
@@ -725,6 +735,7 @@ $C = \frac{N}{\alpha}$
 
 $w:$ direção ortogonal ao hiperplano da função discriminante
 \end{block}
+\item Maximizar a margem de separação
 \end{itemize}
 \end{frame}
 
@@ -777,7 +788,7 @@ $C_2$ & 0.50  & 35.20\\
 Baysiano Simples & 0,9367 & 0,9266 \\ 
 Baysiano Quadrático & 0,9578 & 0,9549 \\ 
 Regressão Logistica & 0,9596 & 0,9563 \\ 
-Percepriton & 0,9613 & 0,9615 \\ 
+Perceptron & 0,9613 & 0,9615 \\ 
 MPL (21) & 0,9735 & 0,9708 \\ 
 MPL(100) & \textbf{0,9807} & \textbf{0,9769} \\ 
 MPL(10,10) & 0,9789 & 0,9746 \\ 
