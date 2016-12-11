@@ -153,9 +153,7 @@ Percentil 75  & 15.78        & 0.4789     & 18.79         &  \\
 \end{table}
 
 
-Análise: Para a variável Radius mean, vemos que a maioria de seus valores se concentram mais proximos da média que é 14,13.
-Para Radius Standard Error, também têm um coportamento semelhante a uma função de cauda longa, porém não temos a presença de valores no intervalo entre 1,6 e 2,4.
-Já para a variável Radius Worst, tem um comportamento semelhante à variável Radius mean.
+Análise: Podemos observar que a média do Raio da célula maligna é bem maior que a de uma célula maligna, isso também se aplica ao valor máximo. Vemos também a presença de muitos outliers no desvio padrão da classe maligna, com a presença de valores muito altos comparado aos demais.
 
 \item Texture
 \begin{figure}[H]
@@ -198,7 +196,7 @@ Percentil 75  & 21.8          & 1.474       & 29.72          & \\ \hline
 \end{tabular}
 \end{table}
 
-Análise: Podemos perceber que a variável Texture Mean, tem um comportamento que lembra a uma função Gaussiana, que de certa forma é espelhada em realação a média, com a exceção dos outliers. Em Texture Standart Error, a média é 1,22  e seus valores estão localizados proóximos á média, porém temos uma certa quantidade de valores distantes, mesmo considerando o desvio parão, e um valor máximo muito alto. Em Texture Worst, vemos que seu comportamento se assemelha a Texture Mean.
+Análise: Ao observar a função de aproximação com a normal presente nos histogramas, percebemos que ambas as classes têm comportamento semelhante nas variáveis de textura média e valor máximo, porém com um deslocamento para a direita em relação à média da classe maligna, que possui um valor médio maior. 
 
 
 \item Perimeter
@@ -242,8 +240,7 @@ Percentil 75  & 104.1           & 3.357         & 125.4            & \\ \hline
 \end{tabular}
 \end{table}
 
-Análise: Em Perimeter Standard Error, vemos a presença de outliers, como por exemplo o valor máximo que é 21,98,  enquanto sua média é 2.87. E em Perimeter Worst, vemos que possui um desvio padrão alto e seus valores estão distribuídos de forma distante da média.
-
+Análise: Percebemos um comportamento semelhante ao que aconteceu com o raio, em que o perímetro médio e o valor máximo do perímetro é maior para a classe maligna em relação a classe benigna. Vemos também a presença de muitos outliers no desvio padrão da classe maligna, com a presença de valores muito altos comparado aos demais de mesma classe.
 
 \item Area
 \begin{figure}[H]
@@ -285,7 +282,7 @@ Percentil 75  & 782.7       & 45.19       & 1084        &  \\ \hline
 \end{tabular}
 \end{table}
 
-Análise: Na variável Area Mean, vemos que ela possui um desvio padrão grande, sendo maior que a metade da média, assim como em Area Worst. Em Area Standard Error, vemos que a variável tem um compartamento semelhante a uma função de cauda longa e temos uma valor bem distante que é o valor máximo ( 2501,00). 
+Análise: Comparando as duas classes, vemos novamente que a área media e o valor máximo da classe maligna é maior que a benigna, assim como no perímetro e no valor do raio de cada célula. Matematicamente, o raio influencia no valor da área e no valor do perímetro o que pode explicar esses comportamentos semelhantes.  
 
 
 \item Smoothness
@@ -328,8 +325,7 @@ Percentil 75  & 0.1053           & 0.008146       & 0.146             & \\ \hlin
 \end{tabular}
 \end{table}
 
-Análise: Podemos ver que tanto Smoothness Mean quanto em Worst, elas tem uma aparência semelhante a uma função Gaussiana e possuem um desvio padrão pequeno, já em Smoothness Standard Error, vemos que ela possui um desvio padrão alto e existe a presença de outliers como o seu valor máximo (0,16340).
-
+Análise: Podemos observar pela função que aproxima os dados do histograma em uma função normal, que a variável de Smoothness Standard Error, possui uma distribuição semelhante para ambas as classes.  E também vemos a presença de outliers. Já para as variáveis de valor médio e valor máximo, vemos que existe uma certa semelhança entre o comportamento das classes, porém com uma diferença no parâmetro location.
 
 \item Compactness
 \begin{figure}[H]
@@ -372,8 +368,7 @@ Percentil 75  & 0.1304            & 0.03245         & 0.3391             &  \\ \
 \end{tabular}
 \end{table}
 
-Análise: Aqui percebemos que as 3 variáveis possuem um desvio padrão alto e seus valores máximos se destoam bantante.
-
+Análise:Podemos ver que nas variáveis Compactness Mean e Worst, existe uma diferença entre as classes benigna e maligna no que diz respeito aos parâmetros location e scale para a função que aproxima a uma normal. Já em Compactness Standard Error na classe benigna, podemos que o número de ocorrências diminui para conforme o valor da variável aumenta. Isso ocorre a partir de 0,03 na classe maligna.
 \item Concavity
 \begin{figure}[H]
 \centering
@@ -415,7 +410,7 @@ Percentil 75  & 0.1307          & 0.04205       & 0.3829           & \\ \hline
 \end{tabular}
 \end{table}
 
-Análise: Nas 3 variáveis percebemos que o seus valores se concentram mais proximos de 0 e a ocorrência desses valores vão decaindo conforme se afastam de 0.
+Análise: Podemos observar que em Concavity Mean e Standard Error na classe benigna, o número de ocorrências diminui para conforme o valor da variável aumenta, já para a classe maligna isso não ocorre, apresentando um comportamento semelhante a uma distribuição normal. 
 
 \item Concave points
 \begin{figure}[H]
@@ -457,7 +452,7 @@ Percentil 75  & 0.074                & 0.01471            & 0.1614              
 \end{tabular}
 \end{table}
 
-Análise: Aqui vemos que a variável Cancave points mean, tem um comportamento semelhante  à uma função de cauda longa e que a variável Cancave Points Standard Error possui alguns outliers,  como o valor máximo por exemplo.
+Análise - Vemos que em Concave Points Worst, os valores médios das classes são bem distintos e observando a função de aproximação com a normal, podemos ver uma pequena área de interseção das curvas. Já para Concave Points Mean e Standard Error, vemos que o número de ocorrências diminui para conforme o valor da variável aumenta para a classe benigna e para maligna isso não é verdade.
 
 \item Symmetry
 \begin{figure}[H]
@@ -500,7 +495,7 @@ Percentil 75  & 0.1957         & 0.02348      & 0.3179          &  \\ \hline
 \end{tabular}
 \end{table}
 
-Análise - A variável Symmetry mean possui um comportamento semelhante  a uma função Gaussiana e tanto Symmetry Standard Error, quanto Wosrt possuem valores máximos distantes da média.
+Análise - Podemos ver que não existem grandes diferenças entre os histogramas de ambas as classes, porém existem a presença de outliers para classe maligna em Simmetry Standard Error e Worst.
 
 \item Fractal Dimension
 \begin{figure}[H]
@@ -543,7 +538,7 @@ Percentil 75  & 0.06612                  & 0.004558               & 0.09208     
 \end{tabular}
 \end{table}
 
-Análise:   Podemos ver que apartir da média, a ocorrência dos valores das váreiaveis vão  diminuindo conforme se distanciam da média.
+Análise:   Observando a função de aproximação com a normal de Fractal Dimension Mean e Standard Error, vemos que ambas possuem medias semelhantes, porém com parâmetro scale diferentes. 
 
 A partir dos histogramas podemos avaliar que em geral não revelou características indesejáveis como distribuições multimodais. Conforme comentado algumas apresentaram assimetria.
 
