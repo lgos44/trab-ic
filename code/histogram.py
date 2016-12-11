@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 
 variable_names = ['Diag', 'Radius Mean', 'Texture Mean', 'Perimeter Mean', 'Area Mean', 'Smoothness Mean', 'Compactness Mean', 'Concavity Mean', 'Concave Points Mean',    'Symmetry Mean', 'Fractal Dimension Mean',	'Radius SE', 'Texture SE', 'Perimeter SE', 'Area SE', 'Smoothness SE', 'Compactness SE', 'Concavity SE',     'Concave points SE', 'Symmetry SE', 'Fractal Dimension SE',	'Radius Worst',	'Texture Worst', 'Perimeter Worst', 'Area Worst', 'Smoothness Worst',     'Compactness Worst',	'Concavity Worst', 'Concave Points Worst',	'Symmetry Worst', 'Fractal Dimension Worst']
 
+file_name = ['radius_mean',	'texture_mean',	'perimeter_mean',	'area_mean',	'smoothness_mean',	'compactness_mean',	'concavity_mean',	'concave_points_mean',	'symmetry_mean',	'fractal_dimension_mean',	'radius_se',	'texture_se',	'perimeter_se', 'area_se', 'smoothness_se', 'compactness_se',	'concavity_se',	'concave_points_se',	'symmetry_se',	'fractal_dimension_se',	'radius_worst','texture_worst',	'perimeter_worst',	'area_worst',	'smoothness_worst',	'compactness_worst',	'concavity_worst'	, 'concave_points_worst',	'symmetry_worst',	'fractal_dimension_worst']
+
 # Loads csv discarting the first line (variable names) 
 def loadCsv(filename):
 	data = []
@@ -53,7 +55,7 @@ def histogram():
 		sigma0 = np.std(data_class0)
 		mu1 = np.mean(data_class1)
 		sigma1 = np.std(data_class1)
-		label_class=['benigno','maligno']
+		label_class=['Maligno','Benigno']
 	
 		n, bins, patches = plt.hist([data_class0, data_class1], bins='auto', normed=1, label =label_class)  
 
@@ -66,7 +68,9 @@ def histogram():
 	
 		plt.legend(prop={'size': 10})
 		plt.title(variable_names[j+1])
-		plt.show()
+		#plt.show()
+		plt.savefig(file_name[j])	
+		plt.close()	
 
 
 def main():
