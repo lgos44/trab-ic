@@ -40,7 +40,7 @@
 
 \input{title}
 \section{Introdução}
-Este trabalho será desenvolvido sobre o \textit{dataset Breast Cancer Wisconsin (Diagnostic)}. Este \textit{dataset} possui como variáveis características computadas a partir de imagens digitalizadas de exames de mama por punção aspirativa por agulha fina. Os dados descrevem características do núcleo das células presentes na imagem. 
+Este trabalho foi desenvolvido sobre o \textit{dataset Breast Cancer Wisconsin (Diagnostic)}, fornecido pelo  \textit{UCI Machine Learning}. As variáveis deste \textit{dataset} são características computadas a partir de imagens digitalizadas de exames de mama por punção aspirativa por agulha fina. Os dados descrevem características do núcleo das células presentes na imagem. 
 \section{Caracterização}
 
 \subsection{Dados}
@@ -103,7 +103,7 @@ De forma a eliminar a terceira dimensão (do conjunto de células), para cada co
 \end{enumerate}
 \end{multicols}
 
-A variável de saída é o diagnóstico (maligno ou benigno codificados como $-1$ e $1$ respectivamente). Existe uma coluna com o ID do paciente que será eliminada ser irrelevante. O dataset apresenta 357 amostras benignas e 212 amostras malignas. 
+A variável de saída é o diagnóstico (maligno ou benigno codificados como $-1$ e $1$ respectivamente). Existe uma coluna com o ID do paciente que foi eliminada por ser irrelevante. O dataset apresenta 357 amostras benignas e 212 amostras malignas. 
 
 %\newpage
 \subsection{Estatísticas Básicas e Histogramas}
@@ -649,13 +649,13 @@ As figuras \ref{fig:distorig} e \ref{fig:zscore} mostram a matriz de distâncias
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/distance_out}
+  \includegraphics[width=\linewidth]{../img/distance_out}
   \caption{Antes da retirada de outliers}
   \label{fig:antes_out}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/distance_clean}
+  \includegraphics[width=\linewidth]{../img/distance_clean}
   \caption{Após da retirada de outliers}
   \label{fig:apos_out}
 \end{subfigure}
@@ -669,13 +669,13 @@ A matriz de distâncias para o conjunto de registros original pode ser observada
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/dist_zscore_out}
+  \includegraphics[width=\linewidth]{../img/dist_zscore_out}
   \caption{Antes da retirada de outliers}
   \label{fig:zantes_out}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{./img/distance_zscore_clean}
+  \includegraphics[width=\linewidth]{../img/distance_zscore_clean}
   \caption{Após da retirada de outliers}
   \label{fig:zapos_out}
 \end{subfigure}
@@ -688,7 +688,7 @@ Como o conjunto de dados contém variáveis em unidades e escalas diferentes, o 
 \section{Formulação do Problema}
 Consiste em um problema de classificação. Deseja-se desenvolver um classificador capaz de predizer a classe do registro (maligno ou benigno).
 
-Para solução deste problema serão aplicados os modelos de classificação a seguir e avaliados os resultados.
+Para solução deste problema foram aplicados os modelos de classificação a seguir e avaliados os resultados.
 
 \begin{itemize}
 \item Classificador Bayesiano Simples
@@ -699,9 +699,10 @@ Para solução deste problema serão aplicados os modelos de classificação a s
 \item SVM
 \end{itemize}
 
+\section{Metodologia}
 Para os testes será utilizada a metodologia de validação cruzada de 10 ciclos. A cada iteração o dataset é dividido em subconjuntos complementares. O modelo é ajustado com o conjunto de treinamento e aplicado para predizer a saída do conjunto de teste. O resultado final é obtido como a média de cada iteração. 
 
-Para avaliar o desempenho do classificador, os resultados preditos pelo teste são comparado com os resultados reais e contabilizada a matriz de confusão. A partir dela são calculados as seguintes métricas:
+Para avaliar o desempenho do classificador, os resultados preditos pelo teste são comparado com os resultados reais e contabilizada a matriz de confusão. A partir dela são calculadas as seguintes métricas:
 \begin{itemize}
 \item Acurácia
 \item Erro global
@@ -709,10 +710,11 @@ Para avaliar o desempenho do classificador, os resultados preditos pelo teste s�
 \item Recuperação
 \end{itemize}
 
-\section{Apresentação da Tecnologia}
-Para a implementação e execução dos algoritmos serão usadas as seguintes ferramentas:
+Métodos como Perceptron, Perceptron Múltiplas Camadas e SVM apresentaram grande sensibilidade a padronização das variáveis de entrada, no entanto, os demais métodos apresentaram resultados melhores sem padronização. Portanto, a título de comparação ambos os resultados são mostrados. No caso do MLP e SVM somente foi exibido o resultado com padronização pois caso contrário apresentavam problemas de convergência. 
 
-A linguagem Python apresenta diversas bibliotecas úteis como:
+\section{Apresentação da Tecnologia}
+Para a implementação e execução dos algoritmos foram usadas as seguintes  bibliotecas da linguagem Python:
+
 \begin{itemize}
 \item \textit{SciPy}: Ecossistema de softwares para matemática, ciência e engenharia. Contém os pacotes:
 \begin{itemize}
@@ -727,7 +729,7 @@ A linguagem Python apresenta diversas bibliotecas úteis como:
 \section{Classificador Bayesiano Simples}
 
 \subsection{Formulação matemática}
-O Classificador Bayesiano baseia-se na aplicação do Teorema de Bayes com a suposição de independência entre cada par de variáveis. 
+O Classificador Bayesiano baseia-se na aplicação do Teorema de Bayes com a suposição de independência entre cada par de variáveis, ou seja, que não há correlação entre as variáveis.
 
 \[P(y|x_1 \dots x_n)  = \frac{P(y)P(x_1, \dots, x_n|y)}{P(x_1,\dots, x_n)}\]
 Onde:
@@ -735,9 +737,12 @@ Onde:
 $y$ é a variável de saída que identifica a classe
 
 $x = [x_1, \dots, x_n] $ é o vetor de entrada 
-
-\subsection{Resultados}
-O dataset não é linearmente separável portanto os resultados não foram tão satisfatórios.
+\\
+A decisão é feita pelo valor máximo da probabilidade a posteriori, dividindo o espaço em:
+\[ R_1 = {x \in R, P(C_1|x) \geq P(C_2|x)}\]
+\[ R_2 = {x \in R, P(C_2|x) > P(C_1|x)}\]
+\subsection{Resultados (sem padronização)}
+O dataset não é linearmente separável portanto os resultados não foram tão satisfatórios, já que o classificador Bayesiano Simples gera uma fronteira de decisão linear. Aĺém disso, assume-se que a distribuição de probabilidade das características é Gaussiana, o que não se verifica para todas as características do dataset, como visto nos histogramas.
 
 \begin{table}[H]
 \centering
@@ -755,7 +760,7 @@ $C_2$ &  1.20&34.50\\
 \begin{minipage}{.5\textwidth}
 \begin{itemize}
 \item $ACC = 93.67 \%$
-\item $ERR =  $
+\item $ERR =  6.33 \%$
 \item $AUC = 0.9266 $
 \item $PRE(C1) = 0.94$
 \item $REC(C1) = 0.8868$
@@ -772,16 +777,50 @@ $C_2$ &  1.20&34.50\\
 \end{figure}
 \end{minipage}%
 
+\subsection{Resultados (com padronização)}
+\begin{table}[H]
+\centering
+\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\hline
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\hline
+$C_1$ &  18.9 & 2.3 \\
+$C_2$ &  1.9 & 33.8 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+\item $ACC =  92.62 \%$
+\item $ERR =  7.38 \%$
+\item $AUC =  0.9191 $
+\item $PRE(C1) =  0.9087 $
+\item $REC(C1) =  0.8915 $
+\item $PRE(C2) =  0.9363 $
+\item $REC(C2) =  0.9468 $
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/naive_bayes_rec_std.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}
+\end{minipage}%
 
 \section{Classificador Bayesiano Quadrático}
 \subsection{Formulação Matemática}
 É um classificador com uma fronteira de decisão quadrática, gerado pela densidades condicionais dos dados e utilizando a regra de Bayes.
 
 A decisão é calculada pela função discriminante:
-\[ g_i(x(t))= ln P(C_i|x(t))= ln P(x(t)|C_i)+ ln P(C_i)\]
+\[ g_i(x(t))= ln P(C_i|x(t))= ln p(x(t)|C_i)+ ln P(C_i)\]
+Substituindo a expressão da distribuição normal multivariada, observa-se que a expressão da função discriminante é dominada por um termo quadrático.
 
 \subsection{Resultados}
-
+Verifica-se que os resultados foram melhores que os obtidos com Naive Bayes pois a superfície de decisão agora é quadrática, permitindo a classificação de modelos mais complexos. Neste caso os resultados com e sem padronização foram os mesmos. 
 \begin{table}[H]
 \centering
 \caption{Matriz de confusão}
@@ -798,8 +837,8 @@ $C_2$ &  1.20&34.50\\
 \begin{minipage}{.5\textwidth}
 \begin{itemize}
 \item $ACC = 95.78 \%$
+\item $ERR =  4.22 \%$
 \item $AUC = 0.9549 $
-\item $ERR =  $
 \item $PRE(C1) = 0.9434$
 \item $REC(C1) = 0.9434$
 \item $PRE(C2) = 0.9664$
@@ -815,9 +854,7 @@ $C_2$ &  1.20&34.50\\
 \end{figure}
 \end{minipage}%
 
-
 \section{Regressão Logística}
-
 \subsection{Formulação Matemática}
 Na regressão logística, a saída do modelo é uma aproximação da probabilidade a posteriori.
 
@@ -827,7 +864,7 @@ A função discriminante é calculada pela função sigmoide, ou função logís
 Onde:
 \[\hat{x}(t) = [1,x(t)] \quad e \quad \theta_i=[\theta\textsubscript{i0},\theta\textsubscript{i1}]^T\]
 
-\subsection{Resultados}
+\subsection{Resultados (sem padronização)}
 
 \begin{table}[H]
 \centering
@@ -845,7 +882,7 @@ $C_2$ & 1.10&34.60\\
 \begin{minipage}{.5\textwidth}
 \begin{itemize}
 \item $ACC = 95.96 \%$
-\item $ERR =  $
+\item $ERR =  4.04 \%$
 \item $AUC = 0.9563 $
 \item $PRE(C1) = 0.9479$
 \item $REC(C1) = 0.9434$
@@ -862,6 +899,39 @@ $C_2$ & 1.10&34.60\\
 \end{figure}
 \end{minipage}%
 
+\subsection{Resultados (com padronização)}
+
+\begin{table}[H]
+\centering
+\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\hline
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\hline
+$C_1$ &  19.9 & 1.3 \\
+$C_2$ &  1.6 & 34.1 \\
+\end{tabular}
+\end{table}
+
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+\item $ACC =  94.9 \%$
+\item $ERR =  5.1 \%$
+\item $AUC =  0.9469 $
+\item $PRE(C1) =  0.9256 $
+\item $REC(C1) =  0.9387 $
+\item $PRE(C2) =  0.9633 $
+\item $REC(C2) =  0.9552 $
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/log_reg_rec_std.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}
+\end{minipage}%
 
 \section{Perceptron}
 \subsection{Formulação Matemática}
@@ -876,11 +946,54 @@ $z(t)$: potencial de ativaçãos
 $h$: função de ativação
 
 $x_i(t)$: entradas do neurônio
-
 %O Perceptron incorpora o conceito de aprendizado, ou seja, se o padrão é classificado corretamente nenhum ajuste é realizado. TODO
+\\
+A função custo do Perceptron é linear como mostrada na figura \ref{fig:lossfunc}, ou \textit{Hinge(0)}.
 
-\subsection{Resultados}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.5\linewidth]{../img/loss_function.png}
+  \label{fig:lossfunc}
+  \captionof{figure}{Funções Custo}
+\end{figure}%
 
+\subsection{Resultados (sem padronização)}
+
+Fica evidente que o Perceptron é bastante sensível a escala das variáveis, apresentando desempenho bastante inferior ao que apresentou com padronização.
+\begin{table}[H]
+\centering
+\caption{Matriz de confusão}
+\begin{tabular}{l l l}
+\hline
+ & \textbf{$\hat{C}_1$ (Predita)} & \textbf{$\hat{C}_2$(Predita)}\\
+\hline
+$C_1$ &  16.8 & 4.4 \\
+$C_2$ &  1.1 & 34.6 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{minipage}{.5\textwidth}
+\begin{itemize}
+\item $ACC =  90.33 \%$
+\item $ERR =  9.67 \%$
+\item $AUC =  0.8808 $
+\item $PRE(C1) =  0.9385 $
+\item $REC(C1) =  0.7925 $
+\item $PRE(C2) =  0.8872 $
+\item $REC(C2) =  0.9692 $
+\end{itemize}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{../img/perc_rec.png}
+  \captionof{figure}{Precisão e Recall}
+  \label{fig:percep}
+\end{figure}
+\end{minipage}%
+
+\subsection{Resultados (com padronização)}
 \begin{table}[H]
 \centering
 \caption{Matriz de confusão}
@@ -897,7 +1010,7 @@ $C_2$ & 1.40&34.30\\
 \begin{minipage}{.5\textwidth}
 \begin{itemize}
 \item $ACC = 96.13 \%$
-\item $ERR =  $
+\item $ERR =  3.87 \% $
 \item $AUC = 0.9615 $
 \item $PRE(C1) = 0.9358$
 \item $REC(C1) = 0.9623$
@@ -908,15 +1021,16 @@ $C_2$ & 1.40&34.30\\
 \begin{minipage}{.5\textwidth}
 \begin{figure}[H]
 \centering
-  \includegraphics[width=\linewidth]{../img/perc_rec.png}
+  \includegraphics[width=\linewidth]{../img/perc_rec_std.png}
   \captionof{figure}{Precisão e Recall}
   \label{fig:percep}
 \end{figure}
-\end{minipage}%
+\end{minipage}
+
 
 \section{Perceptron de Múltiplas Camadas (MLP)}
 \subsection{Formulação Matemática}
-Uma rede-neural MLP apresenta uma camada de entrada que não realiza processamento com a dimensão do vetor de entrada, uma ou mais camadas intermediárias que realizam processamento e uma camada de saída que, num problema de classificação é o vetor com as estimativas das variáveis indicadoras. O modelo McCulloch-Pitts é utilizado nas unidades das camadas intermediárias e de saída.
+Uma rede-neural MLP apresenta uma camada de entrada que não realiza processamento com a dimensão do vetor de entrada, uma ou mais camadas intermediárias que realizam processamento e uma camada de saída que, num problema de classificação é o vetor com as estimativas das variáveis indicadoras. O modelo McCulloch-Pitts é utilizado nas unidades das camadas intermediárias e de saída. Assim, o MLP é capaz de aprender uma função $f(\cdot): R^m \rightarrow R^o$, onde $m$ é dimensão do vetor de entrada e $o$ é a dimensão do vetor de saída. O Perceptron de Múltiplas Camadas é capaz de aprender modelos não lineares.
 
 \begin{figure}[H]
 \centering
@@ -925,22 +1039,38 @@ Uma rede-neural MLP apresenta uma camada de entrada que não realiza processamen
   \captionof{figure}{Rede neural MLP}
 \end{figure}%
 
-A função custo a ser utilizada é a Entropia cruzada, ou função verossimilhança:
-\[ l(\theta) = -\sum_{t=1}^N \nu(t)log(\hat{\nu}) + (1-\nu(t)) log(1-\hat{\nu}(t)) \]
+%Dado um conjunto com entrada $x(t) \in \mathbf{R}^N$ e saída $  y(t) \in \{0, 1\}$
+
+A função custo utilizada é a Entropia cruzada, que para cada elemento é dada por:
+\[l(\hat{y},y,\theta) = -y \ln{\hat{y}} - (1-y) \ln{(1 - \hat{y})} + \alpha ||\theta||_2^2\]
+
+Onde $\alpha ||\theta||_2^2$ é um termo de regularização, $\alpha > 0$ um parametro que controla a magnitude da penalidade e $\theta$ é o vetor de parâmetros.
+%\[ l(\theta) = -\sum_{t=1}^N \nu(t)log(\hat{\nu}) + (1-\nu(t)) log(1-\hat{\nu}(t)) \]
 
 A função de ativação escolhida para os neurônios das camadas intermediárias foi a Tangente hiperbólica:
 
 \[ u(t) = \frac{1- exp(-z(t))}{1+exp(-z(t))}\]
 
- Método de ajuste dos parâmetros escolhido foi o Gradiente descendente estocástico. Aprendizado através do Backpropagation.
+ Método de ajuste dos parâmetros escolhido foi o Gradiente descendente estocástico:
 
-O Perceptron de Múltiplas Camadas é capaz de aprender modelos não lineares.
+\[\theta^{i+1} = \theta^i - \eta \nabla {l}({\theta})^{i}\]
 
-Durante a execução do algoritmo notou-se que os resultados eram diferentes a cada execução. Isso se deve a inicialização aleatória dos parametros. Quando existem camadas escondidas a função custo não é convexa, portanto existe mais de um mínimo local.
+Onde $i$ é o número da iteração e $\eta$ a taxa de aprendizado. 
 
-Além disso, o método é bastante sensível a escala das variáveis de entrada, tornando necessária, mais que em outros métodos, a padronização das variáveis. Foi feita uma padronização de modo a obter média zero e desvio padrão 1. A padronização é calculada no conjunto de treinamento e a mesma transformação é aplicada para o conjunto de teste.
+Depois de calculada função custo, o ajuste é propagado para as camadas anteriores através do Backpropagation.
+
+
+\textbf{Observações:}
+
+Durante a execução do algoritmo notou-se que os resultados eram diferentes a cada execução. Isso se deve a inicialização aleatória dos parametros. Quando existem camadas intermediárias a função custo não é convexa, portanto existe mais de um mínimo local. Isso pode ser resolvido configurando manualmente a semente do gerador aleatório.
+
+Além disso, o método é bastante sensível a escala das variáveis de entrada, tornando necessária, mais que em outros métodos, a padronização das variáveis pois caso contrário o método apresenta problemas de convergência. Foi feita uma padronização de modo a obter média zero e desvio padrão 1. A padronização é calculada no conjunto de treinamento e a mesma transformação é aplicada para o conjunto de teste.
+
 \subsection{Resultados - (21)}
 
+Para este teste foi utilizada uma eurística para obter o número de camadas intermediárias: 
+\[N = \frac{2}{3} (m+o)\]
+Sendo $m$ a dimensão da entrada e $o$ a dimensão da saída.
 \begin{table}[H]
 \centering
 \caption{Matriz de confusão}
@@ -957,7 +1087,7 @@ $C_2$ & 0.40&35.30\\
 \begin{minipage}{.5\textwidth}
 \begin{itemize}
 \item $ACC = 97.35 \%$
-\item $ERR =  $
+\item $ERR =  2.65$
 \item $AUC = 0.9708 \%$
 \item $PRE(C1) = 0.9806$
 \item $REC(C1) = 0.9528$
@@ -992,7 +1122,7 @@ $C_2$ & 0.30  & 35.40\\
 \begin{minipage}{.5\textwidth}
 \begin{itemize}
 \item $ACC = 98.07 \%$
-\item $ERR =  $
+\item $ERR =  1.93 \%$
 \item $AUC = 0.9769  $
 \item $PRE(C1) = 0.9855$
 \item $REC(C1) = 0.9623$
@@ -1026,7 +1156,7 @@ $C_2$ & 0.30  & 35.40\\
 \begin{minipage}{.5\textwidth}
 \begin{itemize}
 \item $ACC = 97.89 \%$
-\item $ERR =  $
+\item $ERR =  2.11 \%$
 \item $AUC = 0.9746  $
 \item $PRE(C1) = 0.9854$
 \item $REC(C1) = 0.9575$
@@ -1044,10 +1174,12 @@ $C_2$ & 0.30  & 35.40\\
 \end{minipage}%
 
 
-\section{Máquinas de Vetor de Suporte (SVC)}
+\section{Máquinas de Vetor de Suporte (SVM)}
 \subsection{Formulação Matemática}
-O SVC é mais recomendado para vetores características de dimensões maiores.
-Função de núcleo utilizada: RBF.
+O SVM baseia-se na representação indireta do espaço de características a partir do produto interno do espaço vetorial de funções. 
+
+A função de núcleo utilizada foi a RBF: $\exp(-\gamma |x-x'|^2)$.
+
 O problema de otimização para o ajuste de parâmetros pode ser escrito como:
 \begin{align*}
 \min_ {w, b, \zeta} \frac{1}{2} w^T w + C \sum_{i=1}^{n} \zeta_i \\
@@ -1058,11 +1190,12 @@ O problema de otimização para o ajuste de parâmetros pode ser escrito como:
 $C = \frac{N}{\alpha}$
 
 $w:$ direção ortogonal ao hiperplano da função discriminante
-
-
+\\
 O método busca maximizar a margem de separação.
 
 \subsection{Resultados}
+O classificação por SVM é mais recomendada para vetores de características de dimensões maiores e poucos registros. No entanto, como o dataset em questão não possui uma quantidade muito grande de registros é válido utilizá-lo.
+
 \begin{table}[H]
 \centering
 \caption{Matriz de confusão}
@@ -1079,7 +1212,7 @@ $C_2$ & 0.50  & 35.20\\
 \begin{minipage}{.5\textwidth}
 \begin{itemize}
 \item $ACC = 97.72 \%$
-\item $ERR =  $
+\item $ERR =  2.28 \%$
 \item $AUC = 0.9741  $
 \item $PRE(C1) = 0.9761$
 \item $REC(C1) = 0.9623$
@@ -1097,7 +1230,12 @@ $C_2$ & 0.50  & 35.20\\
 \end{minipage}%
 
 \section{Conclusão}
-A comparação entre os métodos pode ser vista na tabela \ref{tab:results}.
+A comparação entre os métodos pode ser vista na tabela \ref{tab:results}, onde (NP) ou (P) indica se foi feita padronização ou não, ressaltando que os métodos MLP e SVM apresentaram problemas de convergência sem padronização.
+
+Conforme esperado, observou-se que com o aumento de complexidade dos modelos, os resultados melhoraram. Iniciando com o Bayesiano Simples, que supoe que as variáveis não estão correlacionadas e respeitam uma distribuição gaussiana, observaram-se resultados inferiores a todos os outros métodos. O Bayesiano Quadrático teve melhor desempenho, pois possui uma superfície de decisão quadrática, sendo portanto mais flexível. A Regressão Logística foi levemente superior, apesar de possuir uma função discriminante linear, provavelmente por utilizar o princípio da máxima verossimilhança para ajustar os parâmetros, o que é mais recomendado para problemas de classificação. 
+
+Os modelos baseados em redes neurais apresentaram os melhores resultados. Os resultados melhoravam com maior número de neurônios na rede. No entanto a adição de mais camadas não trouxe melhoras tão significativas pelo fato de o modelo não apresentar complexidade tão grande.  A desvantagem é que conforme aumenta-se o número de neurônios e camadas o custo computacional cresce bastante. Além disso, o modelo é bastante sensível a padronização das variáveis. Como mostra a tabela o melhor desempenho obtido foi com o MLP com uma camada intermediária de 100 neurônios.
+
 \begin{table}[H]
 \centering
 \caption{Resultados}
@@ -1105,14 +1243,17 @@ A comparação entre os métodos pode ser vista na tabela \ref{tab:results}.
 \begin{tabular}{l l l} \hline
  & \textbf{ACC} & \textbf{AUC}\\
 \hline
-Baysiano Simples & 0,9367 & 0,9266 \\ 
-Baysiano Quadrático & 0,9578 & 0,9549 \\ 
-Regressão Logistica & 0,9596 & 0,9563 \\ 
-Perceptron & 0,9613 & 0,9615 \\ 
-MPL (21) & 0,9735 & 0,9708 \\ 
-MPL(100) & \textbf{0,9807} & \textbf{0,9769} \\ 
-MPL(10,10) & 0,9789 & 0,9746 \\ 
-SVM & 0,9772 & 0,9741 \\ 
+Baysiano Simples (NP)      & $93.67\%$          & $0.9266$          \\ 
+Baysiano Simples (P)       & $92.62\%$          & $0.9191$          \\ 
+Baysiano Quadrático (NP/P) & $95.78\%$          & $0.9549$          \\ 
+Regressão Logistica (NP)   & $95.96\%$          & $0.9563$          \\ 
+Regressão Logistica (P)    & $94.90\%$          & $0.9469$          \\ 
+Perceptron (NP)            & $90.33\%$          & $0.8808$          \\ 
+Perceptron (P)             & $96.13\%$          & $0.9615$          \\ 
+MPL (21) (P)               & $97.35\%$          & $0.9708$          \\ 
+MPL(100) (P)               & \textbf{$98.07\%$} & \textbf{$0.9769$} \\ 
+MPL(10,10) (P)             & $97.89\%$          & $0.9746$          \\ 
+SVM (P)                    & $97.72\%$          & $0.9741$          \\ 
 \hline
 \end{tabular}
 \end{table}
