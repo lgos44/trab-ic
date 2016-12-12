@@ -540,7 +540,7 @@ Percentil 75  & 0.06612                  & 0.004558               & 0.09208     
 
 Análise:   Observando a função de aproximação com a normal de Fractal Dimension Mean e Standard Error, vemos que ambas possuem medias semelhantes, porém com parâmetro scale diferentes. 
 
-A partir dos histogramas podemos avaliar que em geral não revelou características indesejáveis como distribuições multimodais. Conforme comentado algumas apresentaram assimetria.
+A partir dos histogramas podemos avaliar que em geral não revelou características indesejáveis como distribuições multimodais. Conforme comentado algumas apresentaram assimetria. Ao final do relatório há uma tabela contendo as estatísticas de todas as variáveis.
 
 \subsection{Matriz de Correlação}
 \begin{figure}[H]
@@ -575,62 +575,6 @@ A partir da matriz podemos concluir que as seguintes variáveis estão fortement
  	 \item Radius Worst, Perimeter Worst
 	 \item Radius Worst, Area Worst
 	 \item Perimeter Worst, Area Worst
-\end{itemize}
-\end{multicols}
-As seguintes variáveis apresentaram correlação negativa:
-
-\begin{multicols}{2}
-\begin{itemize}
-\item Radius Mean, Fractal Dimension Mean
-\item Radius Mean, Texture SE
-\item Radius Mean, Smoothness SE
-\item Radius Mean, Symmetry SE
-\item Radius Mean, Fractal Dimension SE
-\item Texture Mean, Smoothness Mean
-\item Texture Mean, Fractal Dimension Mean
-\item Perimeter Mean, Fractal Dimension Mean
-\item Perimeter Mean, Texture SE
-\item Perimeter Mean, Smoothness SE
-\item Perimeter Mean, Symmetry SE
-\item Perimeter Mean, Fractal Dimension SE
-\item Area Mean, Fractal Dimension Mean
-\item Area Mean, Texture SE
-\item Area Mean, Smoothness SE
-\item Area Mean, Symmetry SE
-\item Area Mean, Fractal Dimension SE
-\item Fractal Dimension Mean, Area SE
-\item Fractal Dimension Mean, Radius Worst
-\item Fractal Dimension Mean, Texture Worst
-\item Fractal Dimension Mean, Perimeter Worst
-\item Fractal Dimension Mean, Area Worst
-\item Texture SE, Radius Worst
-\item Texture SE, Perimeter Worst
-\item Texture SE, Area Worst
-\item Texture SE, Smoothness Worst
-\item Texture SE, Compactness Worst
-\item Texture SE, Concavity Worst
-\item Texture SE, Concave Points Worst
-\item Texture SE, Symmetry Worst
-\item Texture SE, Fractal Dimension Worst
-\item Smoothness SE, Radius Worst
-\item Smoothness SE, Texture Worst
-\item Smoothness SE, Perimeter Worst
-\item Smoothness SE, Area Worst
-\item Smoothness SE, Compactness Worst
-\item Smoothness SE, Concavity Worst
-\item Smoothness SE, Concave Points Worst
-\item Smoothness SE, Symmetry Worst
-\item Symmetry SE, Radius Worst
-\item Symmetry SE, Texture Worst
-\item Symmetry SE, Perimeter Worst
-\item Symmetry SE, Area Worst
-\item Symmetry SE, Smoothness Worst
-\item Symmetry SE, Concave Points Worst
-\item Fractal Dimension SE, Radius Worst
-\item Fractal Dimension SE, Texture Worst
-\item Fractal Dimension SE, Perimeter Worst
-\item Fractal Dimension SE, Area Worst
-
 \end{itemize}
 \end{multicols}
 
@@ -737,7 +681,7 @@ A decisão é feita pelo valor máximo da probabilidade a posteriori, dividindo 
 \[ R_1 = {x \in R, P(C_1|x) \geq P(C_2|x)}\]
 \[ R_2 = {x \in R, P(C_2|x) > P(C_1|x)}\]
 \subsection{Resultados (sem padronização)}
-O dataset não é linearmente separável portanto os resultados não foram tão satisfatórios, já que o classificador Bayesiano Simples gera uma fronteira de decisão linear. Aĺém disso, assume-se que a distribuição de probabilidade das características é Gaussiana, o que não se verifica para todas as características do dataset, como visto nos histogramas.
+O dataset não é linearmente separável portanto os resultados não foram tão satisfatórios, já que o classificador Bayesiano Simples gera uma fronteira de decisão linear. Além disso, assume-se que a distribuição de probabilidade das características é Gaussiana, o que não se verifica para todas as características do dataset, como visto nos histogramas.
 
 \begin{table}[H]
 \centering
@@ -1039,14 +983,14 @@ Uma rede-neural MLP apresenta uma camada de entrada que não realiza processamen
 A função custo utilizada é a Entropia cruzada, que para cada elemento é dada por:
 \[l(\hat{y},y,\theta) = -y \ln{\hat{y}} - (1-y) \ln{(1 - \hat{y})} + \alpha ||\theta||_2^2\]
 
-Onde $\alpha ||\theta||_2^2$ é um termo de regularização, $\alpha > 0$ um parametro que controla a magnitude da penalidade e $\theta$ é o vetor de parâmetros.
+Onde $\alpha ||\theta||_2^2$ é um termo de regularização, $\alpha > 0$ um parâmetro que controla a magnitude da penalidade e $\theta$ é o vetor de parâmetros.
 %\[ l(\theta) = -\sum_{t=1}^N \nu(t)log(\hat{\nu}) + (1-\nu(t)) log(1-\hat{\nu}(t)) \]
 
-A função de ativação escolhida para os neurônios das camadas intermediárias foi a Tangente hiperbólica:
+A função de ativação escolhida para os neurônios das camadas intermediárias foi a Tangente Hiperbólica:
 
 \[ u(t) = \frac{1- exp(-z(t))}{1+exp(-z(t))}\]
 
- Método de ajuste dos parâmetros escolhido foi o Gradiente descendente estocástico:
+ Método de ajuste dos parâmetros escolhido foi o gradiente descendente estocástico:
 
 \[\theta^{i+1} = \theta^i - \eta \nabla {l}({\theta})^{i}\]
 
@@ -1057,7 +1001,7 @@ Depois de calculada função custo, o ajuste é propagado para as camadas anteri
 
 \textbf{Observações:}
 
-Durante a execução do algoritmo notou-se que os resultados eram diferentes a cada execução. Isso se deve a inicialização aleatória dos parametros. Quando existem camadas intermediárias a função custo não é convexa, portanto existe mais de um mínimo local. Isso pode ser resolvido configurando manualmente a semente do gerador aleatório.
+Durante a execução do algoritmo notou-se que os resultados eram diferentes a cada execução. Isso se deve a inicialização aleatória dos parâmetros. Quando existem camadas intermediárias a função custo não é convexa, portanto existe mais de um mínimo local. Isso pode ser resolvido configurando manualmente a semente do gerador aleatório.
 
 Além disso, o método é bastante sensível a escala das variáveis de entrada, tornando necessária, mais que em outros métodos, a padronização das variáveis pois caso contrário o método apresenta problemas de convergência. Foi feita uma padronização de modo a obter média zero e desvio padrão 1. A padronização é calculada no conjunto de treinamento e a mesma transformação é aplicada para o conjunto de teste.
 
@@ -1227,7 +1171,7 @@ $C_2$ & 0.50  & 35.20\\
 \section{Conclusão}
 A comparação entre os métodos pode ser vista na tabela \ref{tab:results}, onde (NP) ou (P) indica se foi feita padronização ou não, ressaltando que os métodos MLP e SVM apresentaram problemas de convergência sem padronização.
 
-Conforme esperado, observou-se que com o aumento de complexidade dos modelos, os resultados melhoraram. Iniciando com o Bayesiano Simples, que supoe que as variáveis não estão correlacionadas e respeitam uma distribuição gaussiana, observaram-se resultados inferiores a todos os outros métodos. O Bayesiano Quadrático teve melhor desempenho, pois possui uma superfície de decisão quadrática, sendo portanto mais flexível. A Regressão Logística foi levemente superior, apesar de possuir uma função discriminante linear, provavelmente por utilizar o princípio da máxima verossimilhança para ajustar os parâmetros, o que é mais recomendado para problemas de classificação. 
+Conforme esperado, observou-se que com o aumento de complexidade dos modelos, os resultados melhoraram. Iniciando com o Bayesiano Simples, que supõe que as variáveis não estão correlacionadas e respeitam uma distribuição gaussiana, observaram-se resultados inferiores a todos os outros métodos. O Bayesiano Quadrático teve melhor desempenho, pois possui uma superfície de decisão quadrática, sendo portanto mais flexível. A Regressão Logística foi levemente superior, apesar de possuir uma função discriminante linear, provavelmente por utilizar o princípio da máxima verossimilhança para ajustar os parâmetros, o que é mais recomendado para problemas de classificação. 
 
 Os modelos baseados em redes neurais apresentaram os melhores resultados. Os resultados melhoravam com maior número de neurônios na rede. No entanto a adição de mais camadas não trouxe melhoras tão significativas pelo fato de o modelo não apresentar complexidade tão grande.  A desvantagem é que conforme aumenta-se o número de neurônios e camadas o custo computacional cresce bastante. Além disso, o modelo é bastante sensível a padronização das variáveis. Como mostra a tabela o melhor desempenho obtido foi com o MLP com uma camada intermediária de 100 neurônios.
 
@@ -1246,7 +1190,7 @@ Regressão Logistica (P)    & $94.90\%$          & $0.9469$          \\
 Perceptron (NP)            & $90.33\%$          & $0.8808$          \\ 
 Perceptron (P)             & $96.13\%$          & $0.9615$          \\ 
 MPL (21) (P)               & $97.35\%$          & $0.9708$          \\ 
-MPL(100) (P)               & \textbf{$98.07\%$} & \textbf{$0.9769$} \\ 
+MPL(100) (P)               & $\mathbf{98.07\%}$ & $\mathbf{0.9769}$ \\ 
 MPL(10,10) (P)             & $97.89\%$          & $0.9746$          \\ 
 SVM (P)                    & $97.72\%$          & $0.9741$          \\ 
 \hline
